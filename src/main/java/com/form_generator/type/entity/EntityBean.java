@@ -15,7 +15,11 @@ public class EntityBean implements Entity {
         this.idFieldName = idFieldName;
     }
 
-    public EntityBean(com.form_generator.type.entity.annotation.Entity entityAnnotation) {
+    public EntityBean(com.form_generator.annotation.Entity entityAnnotation) {
         this(entityAnnotation.idFieldName(), entityAnnotation.nameFieldName());
+    }
+
+    public EntityBean(com.form_generator.annotation.DefinedType definedTypeAnnotation) {
+        this(definedTypeAnnotation.idFieldName(), definedTypeAnnotation.nameFieldName());
     }
 }

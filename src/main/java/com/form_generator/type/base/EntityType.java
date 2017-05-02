@@ -14,8 +14,14 @@ public class EntityType implements Type {
 
     private final Entity entity;
 
-    public EntityType(com.form_generator.type.entity.annotation.Entity entityAnnotation) {
+    public EntityType(com.form_generator.annotation.Entity entityAnnotation) {
+        // TODO refactor unnecessary double constructors
         this(new EntityBean(entityAnnotation));
+    }
+
+    public EntityType(com.form_generator.annotation.DefinedType definedTypeAnnotation) {
+        // TODO refactor unnecessary double constructors
+        this(new EntityBean(definedTypeAnnotation));
     }
 
     public EntityType(Entity entity) {

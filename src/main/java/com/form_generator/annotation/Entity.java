@@ -1,4 +1,4 @@
-package com.form_generator.type.entity.annotation;
+package com.form_generator.annotation;
 
 import java.lang.annotation.*;
 

@@ -18,7 +18,7 @@ public class Render {
     }
 
     private static String surroundWithThymeleafForm(String string) {
-        return "<form class=\"form\" th:action=\"post\">\n" + string + "</form>";
+        return "<form class=\"form\" th:action=\"post\">\n" + string + "\n</form>";
     }
 
 }

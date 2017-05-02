@@ -1,7 +1,8 @@
 package com.form_generator.type;
 
+import com.form_generator.annotation.DefinedType;
 import com.form_generator.type.base.*;
-import com.form_generator.type.entity.annotation.Entity;
+import com.form_generator.annotation.Entity;
 
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -14,12 +15,7 @@ import javax.tools.Diagnostic;
 
 import static javax.tools.Diagnostic.Kind.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.YearMonth;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Utilities class to get {@link Type} objects from a {@link VariableElement} object, which should represent a class field.
@@ -61,9 +57,20 @@ public class FieldTypeUtils {
             return getListType(type, env, fieldElement);
         } else if (isDate(type, env)) {
             return getDateType(type, env);
+        } else if (isNonUserDeclaredType(fieldElement, env)) {
+            return getTypeForDefinedType(type, env, fieldElement);
         } else {
             return getTypeForEntity(type, env, fieldElement);
         }
+    }
+
+    private static Type getTypeForDefinedType(DeclaredType type, ProcessingEnvironment env, VariableElement fieldElement) {
+        DefinedType definedType = fieldElement.getAnnotation(DefinedType.class);
+        return new EntityType(definedType);
+    }
+
+    private static boolean isNonUserDeclaredType(VariableElement fieldElement, ProcessingEnvironment env) {
+        return fieldElement.getAnnotation(DefinedType.class) != null;
     }
 
     private static ListType getListType(DeclaredType type, ProcessingEnvironment env, VariableElement fieldType) {
@@ -98,7 +105,7 @@ public class FieldTypeUtils {
 
     private static boolean isDate(TypeMirror typeMirror, ProcessingEnvironment env) {
         return Arrays.stream(DateType.DateInputType.values())
-                .map(DateType.DateInputType::getClass)
+                .map(DateType.DateInputType::getDateClass)
                 .map(c -> env.getElementUtils().getTypeElement(c.getCanonicalName()))
                 .map(typeElement -> env.getTypeUtils().getDeclaredType(typeElement))
                 .anyMatch(dateTypeMirror -> env.getTypeUtils().isAssignable(typeMirror, dateTypeMirror));

@@ -34,7 +34,7 @@ public class DefaultField implements Field {
     }
 
     private static String getPlural(String singular) {
-        return singular + "s";
+        return singular.endsWith("s") ? singular : singular + "s";
     }
 
     private static String separateOnCaps(String string) {
