@@ -1,8 +1,9 @@
 package com.form_generator.type;
 
 import com.form_generator.annotation.DefinedType;
+import com.form_generator.annotation.FormEntity;
+import com.form_generator.annotation.FormHidden;
 import com.form_generator.type.base.*;
-import com.form_generator.annotation.Entity;
 
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -30,6 +31,10 @@ public class FieldTypeUtils {
     private static Type getDefault(TypeMirror typeMirror, ProcessingEnvironment env, VariableElement fieldElement) {
         TypeKind typeKind = typeMirror.getKind();
 
+        if (isHidden(fieldElement)) {
+            return new HiddenType();
+        }
+
         switch (typeKind) {
             case BYTE:
             case SHORT:
@@ -48,6 +53,9 @@ public class FieldTypeUtils {
         }
     }
 
+    private static boolean isHidden(VariableElement fieldElement) {
+        return fieldElement.getAnnotation(FormHidden.class) != null;
+    }
 
 
     private static Type getTypeForDeclared(DeclaredType type, ProcessingEnvironment env, VariableElement fieldElement) {
@@ -88,9 +96,9 @@ public class FieldTypeUtils {
     private static Type getTypeForEntity(DeclaredType type, ProcessingEnvironment env, VariableElement fieldElement) {
         TypeElement typeElement = (TypeElement) env.getTypeUtils().asElement(type);
 
-        Entity entityAnnotation = typeElement.getAnnotation(Entity.class);
-        if (entityAnnotation != null) {
-            return new EntityType(entityAnnotation);
+        FormEntity formEntityAnnotation = typeElement.getAnnotation(FormEntity.class);
+        if (formEntityAnnotation != null) {
+            return new EntityType(formEntityAnnotation);
         } else {
             missingAnnotationOnEntityError(env.getMessager(), typeElement, fieldElement);
             return new StringType();
@@ -130,7 +138,7 @@ public class FieldTypeUtils {
         String enclosingClass = fieldElement.getEnclosingElement().getSimpleName().toString();
         String fieldName = fieldElement.getSimpleName().toString();
         String fieldType = typeElement.getQualifiedName().toString();
-        messager.printMessage(ERROR, "Type '" + fieldType + "' used in field '" + fieldName + "' in class '" + enclosingClass + "' is not annotated with @Entity. A input of type text will be generated for fields of this type.");
+        messager.printMessage(ERROR, "Type '" + fieldType + "' used in field '" + fieldName + "' in class '" + enclosingClass + "' is not annotated with @FormEntity. A input of type text will be generated for fields of this type.");
     }
 
     private static void typeNotMappedError(TypeMirror typeMirror, Messager messager, VariableElement fieldElement) {

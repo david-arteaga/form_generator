@@ -39,7 +39,7 @@ public class ListType implements Type {
             "        <form>\n" +
             "            <div class=\"form-group\">\n" +
             "                <select class=\"form-control\">\n" +
-            "                        <option disabled selected>select a %s</option>\n" + // [field singular label] (3)
+            "                        <option disabled selected>%s </option>\n" + // [field singular label] (3)
             "                        <option " +
                                         "th:each=\"%s: ${%s}\" " + // [field singular name]: ${[field plural name]} (4)
                                         "th:value=\"${%s.%s}\" " + // ${[field singular name].[list entity name field name]} (5)
@@ -48,7 +48,7 @@ public class ListType implements Type {
             "                </select>\n" +
             "            </div>\n" +
             "            <div class=\"form-group\">\n" +
-            "                <button class=\"btn btn-default\" type=\"button\">Add %s </button>\n" + // [field singular label] (6)
+            "                <button class=\"btn btn-default\" type=\"button\">Add</button>\n" +
             "            </div>\n" +
             "        </form>\n" +
             "    </div>\n" +
@@ -63,8 +63,7 @@ public class ListType implements Type {
                 field.getFieldSingularLabel(), // (2)
                 field.getFieldSingularLabel(), // (3)
                 field.getFieldSingularName(), field.getFieldPluralName(), // (4)
-                field.getFieldSingularName(), fieldListEntity.getNameFieldName(), // (5)
-                field.getFieldSingularLabel() // (6)
+                field.getFieldSingularName(), fieldListEntity.getNameFieldName() // (5)
                 );
     }
 }

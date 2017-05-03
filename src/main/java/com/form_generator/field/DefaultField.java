@@ -38,6 +38,7 @@ public class DefaultField implements Field {
     }
 
     private static String separateOnCaps(String string) {
+        if (string.isEmpty()) return "";
         StringBuilder label = new StringBuilder();
         for (Character ch: string.toCharArray()) {
             if (Character.isUpperCase(ch)) {
@@ -46,6 +47,7 @@ public class DefaultField implements Field {
             }
             label.append(ch);
         }
+        label.setCharAt(0, Character.toUpperCase(label.charAt(0)));
 
         return label.toString();
     }

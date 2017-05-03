@@ -1,5 +1,6 @@
 package com.form_generator.type.base;
 
+import com.form_generator.annotation.FormEntity;
 import com.form_generator.field.Field;
 import com.form_generator.type.entity.Entity;
 import com.form_generator.type.Type;
@@ -14,9 +15,9 @@ public class EntityType implements Type {
 
     private final Entity entity;
 
-    public EntityType(com.form_generator.annotation.Entity entityAnnotation) {
+    public EntityType(FormEntity formEntityAnnotation) {
         // TODO refactor unnecessary double constructors
-        this(new EntityBean(entityAnnotation));
+        this(new EntityBean(formEntityAnnotation));
     }
 
     public EntityType(com.form_generator.annotation.DefinedType definedTypeAnnotation) {
@@ -30,8 +31,8 @@ public class EntityType implements Type {
 
     private final static String template =
             "<div class=\"form-group\">\n" +
-            "    <select name=\"%s%s\" class=\"form-control\">\n" +
-            "        <option selected disabled>Select a %s</option>\n" +
+            "    <select name=\"%s%s\" class=\"form-control\" >\n" +
+            "        <option selected disabled>%s </option>\n" +
             "        <option " +
                         "th:each=\"%s: ${%s}\" " +
                         "th:value=\"${%s.%s}\" " +

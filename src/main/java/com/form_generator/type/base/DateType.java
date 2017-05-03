@@ -20,13 +20,13 @@ public class DateType implements Type {
 
     private static final String template =
             "<div class=\"form-group\">\n" +
-            "    <input type=\"%s\" name=\"%s\" class=\"form-control\" />\n" +
+            "    <input type=\"%s\" name=\"%s\" class=\"form-control\" placeholder=\"%s\" />\n" +
             "</div>";
 
     @Override
     public String renderField(Field field) {
         return String.format(template,
-                dateInputType.getName(), field.getFieldSingularName());
+                dateInputType.getName(), field.getFieldSingularName(), field.getFieldSingularLabel());
     }
 
     public enum DateInputType {

@@ -21,6 +21,6 @@ public class NumberType implements Type {
     @Override
     public String renderField(Field field) {
         return String.format(template,
-                field.getFieldSingularName(), field.getFieldSingularName());
+                field.getFieldSingularName(), field.getFieldSingularLabel());
     }
 }

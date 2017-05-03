@@ -1,10 +1,10 @@
 package com.form_generator.annotation.processor;
 
+import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormIgnore;
 import com.form_generator.field.DefaultField;
 import com.form_generator.field.Field;
 import com.form_generator.render.Render;
-import com.form_generator.annotation.Entity;
 import com.google.auto.service.AutoService;
 
 import javax.annotation.processing.*;
@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Process annotations of type {@link Entity}
+ * Process annotations of type {@link FormEntity}
  * Created by david on 4/30/17.
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -31,7 +31,7 @@ public class EntityProcessor extends AbstractProcessor {
      */
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(Entity.class.getCanonicalName());
+        return Collections.singleton(FormEntity.class.getCanonicalName());
     }
 
     /**
@@ -48,7 +48,7 @@ public class EntityProcessor extends AbstractProcessor {
             Filer filer = processingEnv.getFiler();
 
             for (TypeElement typeElement: annotatedElements) {
-                if (!typeElement.getAnnotation(Entity.class).generateForm()) {
+                if (!typeElement.getAnnotation(FormEntity.class).generateForm()) {
                     continue;
                 }
                 List<Field> typeFields = getFieldsForType(typeElement);
