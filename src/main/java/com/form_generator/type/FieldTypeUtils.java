@@ -61,6 +61,8 @@ public class FieldTypeUtils {
     private static Type getTypeForDeclared(DeclaredType type, ProcessingEnvironment env, VariableElement fieldElement) {
         if (implementsType(type, String.class, env)) {
             return new StringType();
+        } else if (implementsType(type, Number.class, env)) {
+            return new NumberType();
         } else if (implementsType(type, List.class, env)) {
             return getListType(type, env, fieldElement);
         } else if (isDate(type, env)) {
