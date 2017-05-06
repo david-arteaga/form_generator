@@ -1,12 +1,12 @@
 package com.form_generator.type.base;
 
 import com.form_generator.field.Field;
-import com.form_generator.type.Type;
+import com.form_generator.type.FormType;
 
 /**
  * Created by david on 5/1/17.
  */
-public class BooleanType implements Type {
+public class BooleanFormType implements FormType {
 
     private static final String template =
             "<div class=\"form-group\">\n" +

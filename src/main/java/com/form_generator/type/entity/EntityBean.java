@@ -1,12 +1,11 @@
 package com.form_generator.type.entity;
 
 import com.form_generator.annotation.FormEntity;
-import lombok.Data;
+import com.form_generator.annotation.PredefinedType;
 
 /**
  * Created by david on 4/29/17.
  */
-@Data
 public class EntityBean implements Entity {
     private final String nameFieldName;
     private final String idFieldName;
@@ -20,7 +19,17 @@ public class EntityBean implements Entity {
         this(formEntityAnnotation.idFieldName(), formEntityAnnotation.nameFieldName());
     }
 
-    public EntityBean(com.form_generator.annotation.DefinedType definedTypeAnnotation) {
-        this(definedTypeAnnotation.idFieldName(), definedTypeAnnotation.nameFieldName());
+    public EntityBean(PredefinedType predefinedTypeAnnotation) {
+        this(predefinedTypeAnnotation.idFieldName(), predefinedTypeAnnotation.nameFieldName());
+    }
+
+    @Override
+    public String getNameFieldName() {
+        return nameFieldName;
+    }
+
+    @Override
+    public String getIdFieldName() {
+        return idFieldName;
     }
 }

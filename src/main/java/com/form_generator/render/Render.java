@@ -12,7 +12,7 @@ public class Render {
 
     public static String formWithFields(List<Field> fields) {
         List<String> fieldsHtml = fields.stream()
-                .map(field -> field.getType().renderField(field))
+                .map(field -> field.getFormType().renderField(field))
                 .collect(Collectors.toList());
         return surroundWithThymeleafForm(String.join("\n", fieldsHtml));
     }

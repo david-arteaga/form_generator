@@ -76,6 +76,7 @@ public class EntityProcessor extends AbstractProcessor {
 
     private List<Field> getFieldsForType(TypeElement clazz) {
         return clazz.getEnclosedElements().stream()
+                .peek(e -> processingEnv.getMessager().printMessage(Diagnostic.Kind.OTHER, e.getSimpleName()))
                 .filter(e -> e.getKind().isField())
                 .filter(this::notIgnored)
                 .map(VariableElement.class::cast)

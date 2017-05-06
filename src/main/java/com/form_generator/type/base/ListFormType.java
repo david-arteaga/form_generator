@@ -1,17 +1,15 @@
 package com.form_generator.type.base;
 
 import com.form_generator.field.Field;
-import com.form_generator.type.Type;
+import com.form_generator.type.FormType;
 import com.form_generator.type.entity.Entity;
-import lombok.Data;
 
 /**
  * Created by david on 4/29/17.
  */
-@Data
-public class ListType implements Type {
+public class ListFormType implements FormType {
 
-    private final Type listType;
+    private final FormType listFormType;
 
     private static final String template =
             "<div class=\"panel panel-default\">\n" +
@@ -57,7 +55,7 @@ public class ListType implements Type {
     @Override
     public String renderField(Field field) {
         // TODO
-        Entity fieldListEntity = field.getType().getListType().getEntity();
+        Entity fieldListEntity = field.getFormType().getListFormType().getEntity();
         return String.format(template,
                 field.getFieldSingularLabel(), // (1)
                 field.getFieldSingularLabel(), // (2)
@@ -65,5 +63,14 @@ public class ListType implements Type {
                 field.getFieldSingularName(), field.getFieldPluralName(), // (4)
                 field.getFieldSingularName(), fieldListEntity.getNameFieldName() // (5)
                 );
+    }
+
+    public ListFormType(FormType listFormType) {
+        this.listFormType = listFormType;
+    }
+
+    @Override
+    public FormType getListFormType() {
+        return listFormType;
     }
 }

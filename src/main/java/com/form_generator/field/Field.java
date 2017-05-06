@@ -1,6 +1,6 @@
 package com.form_generator.field;
 
-import com.form_generator.type.Type;
+import com.form_generator.type.FormType;
 
 /**
  * Created by david on 4/29/17.
@@ -11,7 +11,7 @@ public interface Field {
 
     String getFieldPluralName();
 
-    Type getType();
+    FormType getFormType();
 
     String getFieldSingularLabel();
 

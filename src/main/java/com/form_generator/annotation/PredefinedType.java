@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.FIELD)
-public @interface DefinedType {
+public @interface PredefinedType {
     /**
      *
      * @return the name of the field that represents an entity's id

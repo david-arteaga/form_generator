@@ -1,31 +1,30 @@
 package com.form_generator.type.base;
 
 import com.form_generator.annotation.FormEntity;
+import com.form_generator.annotation.PredefinedType;
 import com.form_generator.field.Field;
+import com.form_generator.type.FormType;
 import com.form_generator.type.entity.Entity;
-import com.form_generator.type.Type;
 import com.form_generator.type.entity.EntityBean;
-import lombok.Data;
 
 /**
  * Created by david on 4/29/17.
  */
-@Data
-public class EntityType implements Type {
+public class EntityFormType implements FormType {
 
     private final Entity entity;
 
-    public EntityType(FormEntity formEntityAnnotation) {
+    public EntityFormType(FormEntity formEntityAnnotation) {
         // TODO refactor unnecessary double constructors
         this(new EntityBean(formEntityAnnotation));
     }
 
-    public EntityType(com.form_generator.annotation.DefinedType definedTypeAnnotation) {
+    public EntityFormType(PredefinedType predefinedTypeAnnotation) {
         // TODO refactor unnecessary double constructors
-        this(new EntityBean(definedTypeAnnotation));
+        this(new EntityBean(predefinedTypeAnnotation));
     }
 
-    public EntityType(Entity entity) {
+    public EntityFormType(Entity entity) {
         this.entity = entity;
     }
 
@@ -43,7 +42,7 @@ public class EntityType implements Type {
 
     @Override
     public String renderField(Field field) {
-        Entity entity = field.getType().getEntity();
+        Entity entity = field.getFormType().getEntity();
         String idFieldName = entity.getIdFieldName();
         String capsIdFieldName = idFieldName.substring(0, 1).toUpperCase() + idFieldName.substring(1);
         return String.format(template,
@@ -52,5 +51,10 @@ public class EntityType implements Type {
                 field.getFieldSingularName(), field.getFieldPluralName(),
                 field.getFieldSingularName(), idFieldName,
                 field.getFieldSingularName(), entity.getNameFieldName());
+    }
+
+    @Override
+    public Entity getEntity() {
+        return entity;
     }
 }

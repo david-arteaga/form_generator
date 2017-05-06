@@ -1,20 +1,18 @@
 package com.form_generator.type.base;
 
 import com.form_generator.field.Field;
-import com.form_generator.type.Type;
-import lombok.Data;
+import com.form_generator.type.FormType;
 
 import java.time.*;
 
 /**
  * Created by david on 5/1/17.
  */
-@Data
-public class DateType implements Type {
+public class DateFormType implements FormType {
 
-    DateInputType dateInputType;
+    private final DateInputType dateInputType;
 
-    public DateType(DateInputType dateInputType) {
+    public DateFormType(DateInputType dateInputType) {
         this.dateInputType = dateInputType;
     }
 

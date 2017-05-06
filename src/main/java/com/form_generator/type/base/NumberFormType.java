@@ -1,17 +1,17 @@
 package com.form_generator.type.base;
 
 import com.form_generator.field.Field;
-import com.form_generator.type.Type;
+import com.form_generator.type.FormType;
 
 /**
  * Created by david on 4/29/17.
  */
-public class StringType implements Type {
+public class NumberFormType implements FormType {
 
     private final static String template =
             "<div class=\"form-group\">\n" +
             "    <input " +
-                    "type=\"text\" " +
+                    "type=\"number\" " +
                     "name=\"%s\" " +
                     "placeholder=\"%s\" " +
                     "class=\"form-control\" " +
