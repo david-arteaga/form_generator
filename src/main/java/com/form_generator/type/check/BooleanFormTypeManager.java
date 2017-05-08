@@ -1,7 +1,7 @@
 package com.form_generator.type.check;
 
 import com.form_generator.type.FormType;
-import com.form_generator.type.FormTypeChecker;
+import com.form_generator.type.FormTypeManager;
 import com.form_generator.type.base.NumberFormType;
 import com.form_generator.type.utils.ElementTypeUtils;
 
@@ -11,23 +11,18 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 /**
- * Created by david on 5/4/17.
+ * Created by david on 5/8/17.
  */
-public class NumberFormTypeChecker implements FormTypeChecker {
+public class BooleanFormTypeManager implements FormTypeManager {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         TypeKind typeKind = typeMirror.getKind();
 
         switch (typeKind) {
-            case BYTE:
-            case SHORT:
-            case INT:
-            case LONG:
-            case FLOAT:
-            case DOUBLE:
-                return !ElementTypeUtils.isHidden(element);
+            case BOOLEAN:
+                return true;
             case DECLARED:
-                return !ElementTypeUtils.isHidden(element) && ElementTypeUtils.typeImplementsClass(typeMirror, Number.class, env);
+                return ElementTypeUtils.typeImplementsClass(typeMirror, Boolean.class, env);
             default:
                 return false;
         }

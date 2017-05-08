@@ -1,6 +1,6 @@
 package com.form_generator.type.base;
 
-import com.form_generator.field.Field;
+import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;
 import com.form_generator.type.entity.Entity;
 
@@ -53,15 +53,15 @@ public class ListFormType implements FormType {
             "</div>";
 
     @Override
-    public String renderField(Field field) {
+    public String renderField(FormField formField) {
         // TODO
-        Entity fieldListEntity = field.getFormType().getListFormType().getEntity();
+        Entity fieldListEntity = formField.getFormType().getListFormType().getEntity();
         return String.format(template,
-                field.getFieldSingularLabel(), // (1)
-                field.getFieldSingularLabel(), // (2)
-                field.getFieldSingularLabel(), // (3)
-                field.getFieldSingularName(), field.getFieldPluralName(), // (4)
-                field.getFieldSingularName(), fieldListEntity.getNameFieldName() // (5)
+                formField.getFieldSingularLabel(), // (1)
+                formField.getFieldSingularLabel(), // (2)
+                formField.getFieldSingularLabel(), // (3)
+                formField.getFieldSingularName(), formField.getFieldPluralName(), // (4)
+                formField.getFieldSingularName(), fieldListEntity.getNameFieldName() // (5)
                 );
     }
 

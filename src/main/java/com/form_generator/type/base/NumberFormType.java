@@ -1,6 +1,6 @@
 package com.form_generator.type.base;
 
-import com.form_generator.field.Field;
+import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;
 
 /**
@@ -19,8 +19,8 @@ public class NumberFormType implements FormType {
             "</div>";
 
     @Override
-    public String renderField(Field field) {
+    public String renderField(FormField formField) {
         return String.format(template,
-                field.getFieldSingularName(), field.getFieldSingularLabel());
+                formField.getFieldSingularName(), formField.getFieldSingularLabel());
     }
 }

@@ -2,7 +2,7 @@ package com.form_generator.type.base;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;
-import com.form_generator.field.Field;
+import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;
 import com.form_generator.type.entity.Entity;
 import com.form_generator.type.entity.EntityBean;
@@ -41,16 +41,16 @@ public class EntityFormType implements FormType {
             "</div>";
 
     @Override
-    public String renderField(Field field) {
-        Entity entity = field.getFormType().getEntity();
+    public String renderField(FormField formField) {
+        Entity entity = formField.getFormType().getEntity();
         String idFieldName = entity.getIdFieldName();
         String capsIdFieldName = idFieldName.substring(0, 1).toUpperCase() + idFieldName.substring(1);
         return String.format(template,
-                field.getFieldSingularName(), capsIdFieldName,
-                field.getFieldSingularLabel(),
-                field.getFieldSingularName(), field.getFieldPluralName(),
-                field.getFieldSingularName(), idFieldName,
-                field.getFieldSingularName(), entity.getNameFieldName());
+                formField.getFieldSingularName(), capsIdFieldName,
+                formField.getFieldSingularLabel(),
+                formField.getFieldSingularName(), formField.getFieldPluralName(),
+                formField.getFieldSingularName(), idFieldName,
+                formField.getFieldSingularName(), entity.getNameFieldName());
     }
 
     @Override

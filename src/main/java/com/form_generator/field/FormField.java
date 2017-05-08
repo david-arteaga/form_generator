@@ -5,7 +5,7 @@ import com.form_generator.type.FormType;
 /**
  * Created by david on 4/29/17.
  */
-public interface Field {
+public interface FormField {
 
     String getFieldSingularName();
 
@@ -14,6 +14,4 @@ public interface Field {
     FormType getFormType();
 
     String getFieldSingularLabel();
-
-    String getFieldPluralLabel();
 }

@@ -2,9 +2,9 @@ package com.form_generator.annotation.processor;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormIgnore;
-import com.form_generator.field.DefaultField;
-import com.form_generator.field.Field;
+import com.form_generator.field.FormField;
 import com.form_generator.render.Render;
+import com.form_generator.type.utils.ElementTypeUtils;
 import com.google.auto.service.AutoService;
 
 import javax.annotation.processing.*;
@@ -51,9 +51,12 @@ public class EntityProcessor extends AbstractProcessor {
                 if (!typeElement.getAnnotation(FormEntity.class).generateForm()) {
                     continue;
                 }
-                List<Field> typeFields = getFieldsForType(typeElement);
 
-                String form = Render.formWithFields(typeFields);
+                List<Element> elements = getElementsForClass(typeElement);
+
+                List<FormField> formFields = ElementTypeUtils.getFormFieldsForElements(elements, processingEnv);
+
+                String form = Render.formWithFields(formFields);
 
                 // TODO write form to file
 
@@ -74,15 +77,16 @@ public class EntityProcessor extends AbstractProcessor {
         return false;
     }
 
-    private List<Field> getFieldsForType(TypeElement clazz) {
+    private List<Element> getElementsForClass(TypeElement clazz) {
         return clazz.getEnclosedElements().stream()
                 .peek(e -> processingEnv.getMessager().printMessage(Diagnostic.Kind.OTHER, e.getSimpleName()))
                 .filter(e -> e.getKind().isField())
                 .filter(this::notIgnored)
                 .map(VariableElement.class::cast)
-                .map(e -> new DefaultField(e, processingEnv))
                 .collect(Collectors.toList());
     }
+
+
 
     private boolean notIgnored(Element element) {
        return element.getAnnotation(FormIgnore.class) == null;

@@ -1,7 +1,7 @@
 package com.form_generator.type;
 
 import com.form_generator.exception.InvalidOperationException;
-import com.form_generator.field.Field;
+import com.form_generator.field.FormField;
 import com.form_generator.type.entity.Entity;
 
 /**
@@ -16,5 +16,5 @@ public interface FormType {
         throw new InvalidOperationException("This type does not represent an entity");
     }
 
-    String renderField(Field field);
+    String renderField(FormField formField);
 }
