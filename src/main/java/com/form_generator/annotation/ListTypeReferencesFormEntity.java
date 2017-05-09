@@ -12,6 +12,6 @@ public @interface ListTypeReferencesFormEntity {
      * The complete name of the class for the {@link com.form_generator.annotation.FormEntity} this field represents
      * @return the class that this element represents
      */
-    public String value();
+    public Class<?> value();
 
 }

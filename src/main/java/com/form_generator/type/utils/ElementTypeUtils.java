@@ -11,6 +11,7 @@ import com.form_generator.type.check.*;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.AnnotatedConstruct;
+import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
@@ -93,8 +94,8 @@ public class ElementTypeUtils {
      * @return the {@link FormType} that corresponds to this element
      */
     private static FormType getReferencedFormType(Element element, ProcessingEnvironment env, EntityFormTypeManager manager) {
-        ReferencesFormEntity referencesFormEntityAnnotation = element.getAnnotation(ReferencesFormEntity.class);
-        DeclaredType referencedType = DeclaredTypeUtils.getDeclaredTypeForClassName(referencesFormEntityAnnotation.value(), env);
+        AnnotationMirror referencesFormEntityAnnotation = AnnotationUtils.getAnnotation(element, ReferencesFormEntity.class, env).get();
+        DeclaredType referencedType = AnnotationUtils.getAnnotationDeclaredTypeValue(referencesFormEntityAnnotation, "value", env);
 
         return manager.getFormType(referencedType, env, element);
     }
