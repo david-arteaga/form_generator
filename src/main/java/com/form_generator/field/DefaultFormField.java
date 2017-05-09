@@ -19,6 +19,12 @@ public class DefaultFormField implements FormField {
     private final String fieldSingularLabel;
 
     private DefaultFormField(String fieldName, FormType formType) {
+        if (fieldName.endsWith("s")) {
+            fieldName = fieldName.substring(0, fieldName.length() - 1);
+            if (fieldName.endsWith("ie")) {
+                fieldName = fieldName.substring(0, fieldName.length() - 2) + "y";
+            }
+        }
         fieldSingularName = fieldName;
         fieldPluralName = getPlural(fieldName);
 

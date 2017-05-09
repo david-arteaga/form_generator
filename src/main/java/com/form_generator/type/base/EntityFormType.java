@@ -15,12 +15,10 @@ public class EntityFormType implements FormType {
     private final Entity entity;
 
     public EntityFormType(FormEntity formEntityAnnotation) {
-        // TODO refactor unnecessary double constructors
         this(new EntityBean(formEntityAnnotation));
     }
 
     public EntityFormType(PredefinedType predefinedTypeAnnotation) {
-        // TODO refactor unnecessary double constructors
         this(new EntityBean(predefinedTypeAnnotation));
     }
 
@@ -30,7 +28,7 @@ public class EntityFormType implements FormType {
 
     private final static String template =
             "<div class=\"form-group\">\n" +
-            "    <select name=\"%s%s\" class=\"form-control\" >\n" +
+            "    <select name=\"%s\" class=\"form-control\" >\n" +
             "        <option selected disabled>%s </option>\n" +
             "        <option " +
                         "th:each=\"%s: ${%s}\" " +
@@ -44,9 +42,8 @@ public class EntityFormType implements FormType {
     public String renderField(FormField formField) {
         Entity entity = formField.getFormType().getEntity();
         String idFieldName = entity.getIdFieldName();
-        String capsIdFieldName = idFieldName.substring(0, 1).toUpperCase() + idFieldName.substring(1);
         return String.format(template,
-                formField.getFieldSingularName(), capsIdFieldName,
+                formField.getFieldSingularName(),
                 formField.getFieldSingularLabel(),
                 formField.getFieldSingularName(), formField.getFieldPluralName(),
                 formField.getFieldSingularName(), idFieldName,

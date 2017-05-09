@@ -1,8 +1,10 @@
 package com.form_generator.type.base;
 
+import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;
 import com.form_generator.type.entity.Entity;
+import com.form_generator.type.entity.EntityBean;
 
 /**
  * Created by david on 4/29/17.
@@ -40,8 +42,8 @@ public class ListFormType implements FormType {
             "                        <option disabled selected>%s </option>\n" + // [field singular label] (3)
             "                        <option " +
                                         "th:each=\"%s: ${%s}\" " + // [field singular name]: ${[field plural name]} (4)
-                                        "th:value=\"${%s.%s}\" " + // ${[field singular name].[list entity name field name]} (5)
-                                        "th:text=\"\">option label " +
+                                        "th:value=\"${%s.%s}\" " + // ${[field singular name].[list entity id field name]} (5)
+                                        "th:text=\"${%s.%s}\">option label " + // ${[field singular name].[list entity name field name]} (6)
                                     "</option>\n" +
             "                </select>\n" +
             "            </div>\n" +
@@ -54,14 +56,21 @@ public class ListFormType implements FormType {
 
     @Override
     public String renderField(FormField formField) {
-        // TODO
-        Entity fieldListEntity = formField.getFormType().getListFormType().getEntity();
+        // TODO render correctly fields that are not entities
+        Entity fieldListEntity;
+        try {
+            fieldListEntity = formField.getFormType().getListFormType().getEntity();
+        } catch (InvalidOperationException ex) {
+            fieldListEntity = new EntityBean("id", "name");
+        }
+
         return String.format(template,
                 formField.getFieldSingularLabel(), // (1)
                 formField.getFieldSingularLabel(), // (2)
                 formField.getFieldSingularLabel(), // (3)
                 formField.getFieldSingularName(), formField.getFieldPluralName(), // (4)
-                formField.getFieldSingularName(), fieldListEntity.getNameFieldName() // (5)
+                formField.getFieldSingularName(), fieldListEntity.getIdFieldName(), // (5)
+                formField.getFieldSingularName(), fieldListEntity.getNameFieldName()
                 );
     }
 

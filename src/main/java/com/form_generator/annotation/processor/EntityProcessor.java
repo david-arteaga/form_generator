@@ -43,7 +43,9 @@ public class EntityProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (TypeElement annotationType: annotations) {
-            Set<? extends TypeElement> annotatedElements = roundEnv.getElementsAnnotatedWith(annotationType).stream().map(e -> (TypeElement) e).collect(Collectors.toSet());
+            Set<? extends TypeElement> annotatedElements = roundEnv.getElementsAnnotatedWith(annotationType).stream()
+                    .map(e -> (TypeElement) e)
+                    .collect(Collectors.toSet());
 
             Filer filer = processingEnv.getFiler();
 
@@ -79,7 +81,7 @@ public class EntityProcessor extends AbstractProcessor {
 
     private List<Element> getElementsForClass(TypeElement clazz) {
         return clazz.getEnclosedElements().stream()
-                .peek(e -> processingEnv.getMessager().printMessage(Diagnostic.Kind.OTHER, e.getSimpleName()))
+                //.peek(e -> processingEnv.getMessager().printMessage(Diagnostic.Kind.OTHER, e.getSimpleName()))
                 .filter(e -> e.getKind().isField())
                 .filter(this::notIgnored)
                 .map(VariableElement.class::cast)

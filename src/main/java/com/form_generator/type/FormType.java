@@ -9,11 +9,11 @@ import com.form_generator.type.entity.Entity;
  */
 public interface FormType {
     default Entity getEntity() {
-        throw new InvalidOperationException("This type does not represent an entity");
+        throw new InvalidOperationException("This type, '" + this.getClass().getCanonicalName() + "', does not represent an entity");
     }
 
     default FormType getListFormType() {
-        throw new InvalidOperationException("This type does not represent an entity");
+        throw new InvalidOperationException("This type, '" + this.getClass().getCanonicalName() + "', does not represent an entity");
     }
 
     String renderField(FormField formField);

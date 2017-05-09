@@ -7,12 +7,12 @@ import com.form_generator.annotation.PredefinedType;
  * Created by david on 4/29/17.
  */
 public class EntityBean implements Entity {
-    private final String nameFieldName;
     private final String idFieldName;
+    private final String nameFieldName;
 
-    public EntityBean(String nameFieldName, String idFieldName) {
-        this.nameFieldName = nameFieldName;
+    public EntityBean(String idFieldName, String nameFieldName) {
         this.idFieldName = idFieldName;
+        this.nameFieldName = nameFieldName;
     }
 
     public EntityBean(FormEntity formEntityAnnotation) {
@@ -24,12 +24,13 @@ public class EntityBean implements Entity {
     }
 
     @Override
+    public String getIdFieldName() {
+        return idFieldName;
+    }
+
+    @Override
     public String getNameFieldName() {
         return nameFieldName;
     }
 
-    @Override
-    public String getIdFieldName() {
-        return idFieldName;
-    }
 }

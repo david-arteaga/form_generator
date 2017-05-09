@@ -5,10 +5,10 @@ import com.form_generator.annotation.PredefinedType;
 import com.form_generator.type.FormType;
 import com.form_generator.type.FormTypeManager;
 import com.form_generator.type.base.EntityFormType;
+import com.form_generator.type.utils.DeclaredTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
@@ -25,7 +25,7 @@ public class EntityFormTypeManager implements FormTypeManager {
         }
 
         PredefinedType predefinedTypeAnnotation = element.getAnnotation(PredefinedType.class);
-        return predefinedTypeAnnotation != null || getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env) != null;
+        return predefinedTypeAnnotation != null || DeclaredTypeUtils.getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env) != null;
     }
 
     @Override
@@ -36,17 +36,8 @@ public class EntityFormTypeManager implements FormTypeManager {
             return new EntityFormType(predefinedTypeAnnotation);
         }
 
-        FormEntity formEntityAnnotation = getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env);
+        FormEntity formEntityAnnotation = DeclaredTypeUtils.getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env);
         return new EntityFormType(formEntityAnnotation);
-    }
-
-    private FormEntity getEntityAnnotationOnTypeDeclarationElement(DeclaredType declaredType, ProcessingEnvironment env) {
-        TypeElement typeDeclarationElement = getTypeDeclarationElement(declaredType, env);
-        return typeDeclarationElement.getAnnotation(FormEntity.class);
-    }
-
-    private TypeElement getTypeDeclarationElement (DeclaredType declaredType, ProcessingEnvironment env) {
-        return (TypeElement) env.getTypeUtils().asElement(declaredType);
     }
 
 }
