@@ -1,6 +1,6 @@
 build/
 .gradle/
-.idea/workspace.xml
+.idea/
 
 *.class
 
