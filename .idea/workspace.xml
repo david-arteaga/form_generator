@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="73dd6b8f-3f55-4a40-8f1d-ecbf1a62a3fa" name="Default" comment="" />
+    <list default="true" id="73dd6b8f-3f55-4a40-8f1d-ecbf1a62a3fa" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -69,12 +71,12 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="$USER_HOME$/.sdkman/candidates/gradle/3.4.1" />
+        <entry key="$PROJECT_DIR$" value="$USER_HOME$/.gradle/wrapper/dists/gradle-3.3-bin/64bhckfm0iuu9gap9hg3r7ev2/gradle-3.3" />
       </map>
     </option>
     <option name="myGradleVersions">
       <map>
-        <entry key="$PROJECT_DIR$" value="3.4.1" />
+        <entry key="$PROJECT_DIR$" value="3.3" />
       </map>
     </option>
     <option name="availableProjects">
@@ -244,7 +246,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2987461736000" />
+        <entry key="$PROJECT_DIR$" value="2991789232000" />
         <entry key="$PROJECT_DIR$/build.gradle" value="992372522" />
       </map>
     </option>
@@ -267,75 +269,6 @@
               <option name="name" value="form_generator" />
               <option name="projectBuildClasspath">
                 <list>
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-open-api-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-model-groovy-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-docs-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-base-services-groovy-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-messaging-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-cli-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-installation-beacon-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-launcher-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-tooling-api-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/ant-1.9.6.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-process-services-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-logging-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-jvm-services-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-ui-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-script-kotlin-0.5.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-version-info-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/groovy-all-2.4.7.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-model-core-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-native-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/ant-launcher-1.9.6.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-base-services-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-resources-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-wrapper-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/gradle-core-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-scala-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-platform-jvm-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-jacoco-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-workers-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-publish-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-ide-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-testing-base-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-maven-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-ide-play-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-javascript-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-language-groovy-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-jetty-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-test-kit-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-testing-native-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-antlr-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-platform-base-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-language-java-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-osgi-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-platform-native-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-tooling-api-builders-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-build-init-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-language-jvm-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-ivy-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-build-cache-http-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-ide-native-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-signing-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-code-quality-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-language-scala-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/ivy-2.2.0.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-platform-play-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-language-native-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-plugin-development-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-resources-http-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-resources-s3-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-testing-jvm-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-plugin-use-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-announce-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-plugins-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-ear-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-dependency-management-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-build-comparison-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-composite-builds-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-diagnostics-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-resources-sftp-3.4.1.jar" />
-                  <option value="$USER_HOME$/.sdkman/candidates/gradle/current/lib/plugins/gradle-reporting-3.4.1.jar" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/java" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/groovy" />
                 </list>
