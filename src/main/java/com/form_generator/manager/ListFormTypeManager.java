@@ -3,10 +3,9 @@ package com.form_generator.manager;
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.ListTypeReferencesFormEntity;
 import com.form_generator.exception.InvalidOperationException;
-import com.form_generator.type.FormType;
-import com.form_generator.type.EntityFormType;
-import com.form_generator.type.ListFormType;
-import com.form_generator.type.StringFormType;
+import com.form_generator.type.*;
+import com.form_generator.type.EntityFormFieldType;
+import com.form_generator.type.ListFormFieldType;
 import com.form_generator.type.utils.AnnotationUtils;
 import com.form_generator.type.utils.ElementTypeUtils;
 
@@ -29,12 +28,12 @@ public class ListFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         DeclaredType listType = (DeclaredType) typeMirror;
         List<? extends TypeMirror> listParams = listType.getTypeArguments();
-        FormType listFormType;
+        FormFieldType listFormFieldType;
         if (listParams.isEmpty()) {
-            listFormType = new StringFormType();
+            listFormFieldType = new StringFormFieldType();
         } else {
             TypeMirror listTypeMirror = listParams.get(0);
 
@@ -45,17 +44,17 @@ public class ListFormTypeManager implements FormTypeManager {
 
                 FormEntity formEntityAnnotation = referencedTypeElement.getAnnotation(FormEntity.class);
                 if (formEntityAnnotation != null) {
-                    listFormType = new EntityFormType(formEntityAnnotation);
+                    listFormFieldType = new EntityFormFieldType(formEntityAnnotation);
                 } else {
                     invalidEntityError(env.getMessager(), element, referencedTypeElement);
-                    listFormType = ElementTypeUtils.getDefault(listTypeMirror, env, element);
+                    listFormFieldType = ElementTypeUtils.getDefault(listTypeMirror, env, element);
                 }
             } else {
-                listFormType = ElementTypeUtils.getDefault(listTypeMirror, env, element);
+                listFormFieldType = ElementTypeUtils.getDefault(listTypeMirror, env, element);
             }
 
             try {
-                listFormType.getEntity();
+                listFormFieldType.getEntity();
             } catch (InvalidOperationException ex) {
                 env.getMessager().printMessage(Diagnostic.Kind.NOTE,
                         "Error in element " + element.getSimpleName() + " in class " + element.getEnclosingElement().asType().toString() +
@@ -63,7 +62,7 @@ public class ListFormTypeManager implements FormTypeManager {
                                 " It is not yet supported to include lists of elements that are not entities");
             }
         }
-        return new ListFormType(listFormType);
+        return new ListFormFieldType(listFormFieldType);
     }
 
     private void invalidEntityError(Messager messager, Element element, TypeElement referencedType) {

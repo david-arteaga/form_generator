@@ -3,12 +3,12 @@ package com.form_generator.type.utils;
 import com.form_generator.annotation.FormHidden;
 import com.form_generator.annotation.ReferencesFormEntity;
 import com.form_generator.manager.*;
-import com.form_generator.field.DefaultFormField;
-import com.form_generator.field.FormField;
-import com.form_generator.type.FormType;
+import com.form_generator.form.field.DefaultFormField;
+import com.form_generator.form.field.FormField;
+import com.form_generator.type.FormFieldType;
 import com.form_generator.manager.FormTypeManager;
-import com.form_generator.type.HiddenFormType;
-import com.form_generator.type.StringFormType;
+import com.form_generator.type.HiddenFormFieldType;
+import com.form_generator.type.StringFormFieldType;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.AnnotatedConstruct;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Utilities class to get {@link FormType} objects from a {@link Element} object, which should represent a class field.
+ * Utilities class to get {@link FormFieldType} objects from a {@link Element} object, which should represent a class field.
  * Created by david on 4/29/17.
  */
 public class ElementTypeUtils {
@@ -45,7 +45,7 @@ public class ElementTypeUtils {
 
         List<FormField> hiddenFields = elements.stream()
                 .filter(ElementTypeUtils::isHidden)
-                .map(e -> new DefaultFormField(e, new HiddenFormType()))
+                .map(e -> new DefaultFormField(e, new HiddenFormFieldType()))
                 .collect(Collectors.toList());
 
         List<FormField> nonHiddenFields = elements.stream()
@@ -67,13 +67,13 @@ public class ElementTypeUtils {
     }
 
     /**
-     * Get the {@link FormType} for a {@link Element} of a type represented by a {@link TypeMirror}
+     * Get the {@link FormFieldType} for a {@link Element} of a type represented by a {@link TypeMirror}
      * @param typeMirror the {@link TypeMirror} of the {@link Element}
      * @param env the {@link ProcessingEnvironment} used to evaluate the typeMirror
      * @param element the element an input will be generated for
-     * @return the {@link FormType} that represents the element
+     * @return the {@link FormFieldType} that represents the element
      */
-    public static FormType getDefault(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public static FormFieldType getDefault(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         if (referencesEntity(typeMirror)) {
             env.getMessager().printMessage(Diagnostic.Kind.NOTE, "type " + typeMirror.toString() + " in element " + element.getSimpleName() + " in " + element.getEnclosingElement().getSimpleName() + " is annotated with ReferencesFormEntity");
         }
@@ -85,16 +85,16 @@ public class ElementTypeUtils {
         }
 
         ErrorUtils.typeNotMappedError(typeMirror, env.getMessager(), element);
-        return new StringFormType();
+        return new StringFormFieldType();
     }
 
     /**
-     * Returns the {@link FormType} that corresponds to an element, considering the entity referenced according to the {@link ReferencesFormEntity} annotation.
+     * Returns the {@link FormFieldType} that corresponds to an element, considering the entity referenced according to the {@link ReferencesFormEntity} annotation.
      * If the element does not have this annotation, a {@link NullPointerException} will be thrown
      * @param element the element to be evaluated
-     * @return the {@link FormType} that corresponds to this element
+     * @return the {@link FormFieldType} that corresponds to this element
      */
-    private static FormType getReferencedFormType(Element element, ProcessingEnvironment env, EntityFormTypeManager manager) {
+    private static FormFieldType getReferencedFormType(Element element, ProcessingEnvironment env, EntityFormTypeManager manager) {
         AnnotationMirror referencesFormEntityAnnotation = AnnotationUtils.getAnnotation(element, ReferencesFormEntity.class, env).get();
         DeclaredType referencedType = AnnotationUtils.getAnnotationDeclaredTypeValue(referencesFormEntityAnnotation, "value", env);
 

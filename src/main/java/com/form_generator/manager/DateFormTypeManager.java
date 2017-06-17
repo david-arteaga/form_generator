@@ -1,7 +1,7 @@
 package com.form_generator.manager;
 
-import com.form_generator.type.FormType;
-import com.form_generator.type.DateFormType;
+import com.form_generator.type.DateFormFieldType;
+import com.form_generator.type.FormFieldType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -17,25 +17,25 @@ import java.util.Arrays;
 public class DateFormTypeManager implements FormTypeManager {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        return Arrays.stream(DateFormType.DateInputType.values())
-                .map(DateFormType.DateInputType::getDateClass)
+        return Arrays.stream(DateFormFieldType.DateInputType.values())
+                .map(DateFormFieldType.DateInputType::getDateClass)
                 .map(c -> env.getElementUtils().getTypeElement(c.getCanonicalName()))
                 .map(typeElement -> env.getTypeUtils().getDeclaredType(typeElement))
                 .anyMatch(dateTypeMirror -> env.getTypeUtils().isAssignable(typeMirror, dateTypeMirror));
     }
 
     @Override
-    public FormType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         DeclaredType declaredType = (DeclaredType) typeMirror;
 
-        for (DateFormType.DateInputType inputType: DateFormType.DateInputType.values()) {
+        for (DateFormFieldType.DateInputType inputType: DateFormFieldType.DateInputType.values()) {
             if (env.getTypeUtils().isAssignable(declaredType, DeclaredTypeUtils.getDeclaredTypeForClass(inputType.getDateClass(), env))) {
-                return new DateFormType(inputType);
+                return new DateFormFieldType(inputType);
             }
         }
 
         env.getMessager().printMessage(Diagnostic.Kind.ERROR,
-                "Oops! This is our mistake. Criteria for generating inputs of type 'date' and related includes types that have not been implemented in 'com.form_generator.type.DateFormType.DateInputType'. A input of type 'date' will be generated for type '" + declaredType.toString() + "'.");
-        return new DateFormType(DateFormType.DateInputType.DATE);
+                "Oops! This is our mistake. Criteria for generating inputs of type 'date' and related includes types that have not been implemented in 'com.form_generator.type.DateFormFieldType.DateInputType'. A input of type 'date' will be generated for type '" + declaredType.toString() + "'.");
+        return new DateFormFieldType(DateFormFieldType.DateInputType.DATE);
     }
 }

@@ -2,8 +2,8 @@ package com.form_generator.manager;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;
-import com.form_generator.type.FormType;
-import com.form_generator.type.EntityFormType;
+import com.form_generator.type.FormFieldType;
+import com.form_generator.type.EntityFormFieldType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -28,15 +28,15 @@ public class EntityFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         // TODO
         PredefinedType predefinedTypeAnnotation = element.getAnnotation(PredefinedType.class);
         if (predefinedTypeAnnotation != null) {
-            return new EntityFormType(predefinedTypeAnnotation);
+            return new EntityFormFieldType(predefinedTypeAnnotation);
         }
 
         FormEntity formEntityAnnotation = DeclaredTypeUtils.getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env);
-        return new EntityFormType(formEntityAnnotation);
+        return new EntityFormFieldType(formEntityAnnotation);
     }
 
 }

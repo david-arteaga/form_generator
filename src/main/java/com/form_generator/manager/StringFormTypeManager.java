@@ -1,7 +1,7 @@
 package com.form_generator.manager;
 
-import com.form_generator.type.FormType;
-import com.form_generator.type.StringFormType;
+import com.form_generator.type.FormFieldType;
+import com.form_generator.type.StringFormFieldType;
 import com.form_generator.type.utils.ElementTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -18,7 +18,7 @@ public class StringFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        return new StringFormType();
+    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+        return new StringFormFieldType();
     }
 }

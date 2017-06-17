@@ -1,7 +1,7 @@
 package com.form_generator.manager;
 
-import com.form_generator.type.FormType;
-import com.form_generator.type.NumberFormType;
+import com.form_generator.type.FormFieldType;
+import com.form_generator.type.NumberFormFieldType;
 import com.form_generator.type.utils.ElementTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -33,7 +33,7 @@ public class NumberFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        return new NumberFormType();
+    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+        return new NumberFormFieldType();
     }
 }

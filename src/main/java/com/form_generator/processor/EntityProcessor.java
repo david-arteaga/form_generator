@@ -2,7 +2,7 @@ package com.form_generator.processor;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormIgnore;
-import com.form_generator.field.FormField;
+import com.form_generator.form.field.FormField;
 import com.form_generator.render.Render;
 import com.form_generator.type.utils.ElementTypeUtils;
 import com.google.auto.service.AutoService;
@@ -43,30 +43,28 @@ public class EntityProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (TypeElement annotationType: annotations) {
-            Set<? extends TypeElement> annotatedElements = roundEnv.getElementsAnnotatedWith(annotationType).stream()
+
+            // get classes annotated with @FormEntity
+            Set<? extends TypeElement> annotatedClasses = roundEnv.getElementsAnnotatedWith(annotationType).stream()
                     .map(e -> (TypeElement) e)
+                    .filter(this::shouldGenerateForm)
                     .collect(Collectors.toSet());
 
-            Filer filer = processingEnv.getFiler();
 
-            for (TypeElement typeElement: annotatedElements) {
-                if (!typeElement.getAnnotation(FormEntity.class).generateForm()) {
-                    continue;
-                }
+
+            for (TypeElement typeElement: annotatedClasses) {
 
                 List<Element> elements = getElementsForClass(typeElement);
 
                 List<FormField> formFields = ElementTypeUtils.getFormFieldsForElements(elements, processingEnv);
 
-                String form = Render.formWithFields(formFields);
-
-                // TODO write form to file
-
+                String formHtml = Render.formWithFields(formFields);
 
                 try {
+                    Filer filer = processingEnv.getFiler();
                     FileObject file = filer.createResource(StandardLocation.SOURCE_OUTPUT, "resources.main.templates", typeElement.getSimpleName() + "Form.html");
                     try (Writer out = file.openWriter()) {
-                        out.write(form);
+                        out.write(formHtml);
                     }
 
                 } catch (IOException e) {
@@ -77,6 +75,10 @@ public class EntityProcessor extends AbstractProcessor {
 
         }
         return false;
+    }
+
+    private  boolean shouldGenerateForm(TypeElement e) {
+        return !e.getAnnotation(FormEntity.class).generateForm();
     }
 
     private List<Element> getElementsForClass(TypeElement clazz) {
@@ -92,9 +94,5 @@ public class EntityProcessor extends AbstractProcessor {
 
     private boolean notIgnored(Element element) {
        return element.getAnnotation(FormIgnore.class) == null;
-    }
-
-    private void print(String message) {
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.OTHER, message);
     }
 }

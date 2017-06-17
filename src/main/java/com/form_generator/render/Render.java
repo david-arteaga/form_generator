@@ -1,6 +1,6 @@
 package com.form_generator.render;
 
-import com.form_generator.field.FormField;
+import com.form_generator.form.field.FormField;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class Render {
 
     public static String formWithFields(List<FormField> formFields) {
         List<String> fieldsHtml = formFields.stream()
-                .map(field -> field.getFormType().renderField(field))
+                .map(field -> field.getFormFieldType().renderField(field))
                 .collect(Collectors.toList());
         return surroundWithThymeleafForm(String.join("\n", fieldsHtml));
     }

@@ -1,12 +1,11 @@
 package com.form_generator.type;
 
-import com.form_generator.field.FormField;
-import com.form_generator.type.FormType;
+import com.form_generator.form.field.FormField;
 
 /**
  * Created by david on 4/29/17.
  */
-public class StringFormType implements FormType {
+public class StringFormFieldType implements FormFieldType {
 
     private final static String template =
             "<div class=\"form-group\">\n" +

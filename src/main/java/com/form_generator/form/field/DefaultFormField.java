@@ -1,11 +1,8 @@
-package com.form_generator.field;
+package com.form_generator.form.field;
 
-import com.form_generator.type.FormType;
-import com.form_generator.type.utils.ElementTypeUtils;
+import com.form_generator.type.FormFieldType;
 
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.VariableElement;
 
 /**
  * Created by david on 4/29/17.
@@ -14,11 +11,11 @@ import javax.lang.model.element.VariableElement;
 public class DefaultFormField implements FormField {
     private final String fieldSingularName;
     private final String fieldPluralName;
-    private final FormType formType;
+    private final FormFieldType formFieldType;
 
     private final String fieldSingularLabel;
 
-    private DefaultFormField(String fieldName, FormType formType) {
+    private DefaultFormField(String fieldName, FormFieldType formFieldType) {
         if (fieldName.endsWith("s")) {
             fieldName = fieldName.substring(0, fieldName.length() - 1);
             if (fieldName.endsWith("ie")) {
@@ -28,12 +25,12 @@ public class DefaultFormField implements FormField {
         fieldSingularName = fieldName;
         fieldPluralName = getPlural(fieldName);
 
-        this.formType = formType;
+        this.formFieldType = formFieldType;
         fieldSingularLabel = separateOnCaps(fieldName);
     }
 
-    public DefaultFormField(Element element, FormType formType) {
-        this(element.getSimpleName().toString(), formType);
+    public DefaultFormField(Element element, FormFieldType formFieldType) {
+        this(element.getSimpleName().toString(), formFieldType);
     }
 
     private static String getPlural(String singular) {
@@ -66,8 +63,8 @@ public class DefaultFormField implements FormField {
     }
 
     @Override
-    public FormType getFormType() {
-        return formType;
+    public FormFieldType getFormFieldType() {
+        return formFieldType;
     }
 
     @Override

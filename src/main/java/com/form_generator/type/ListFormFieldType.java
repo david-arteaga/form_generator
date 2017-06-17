@@ -1,17 +1,16 @@
 package com.form_generator.type;
 
 import com.form_generator.exception.InvalidOperationException;
-import com.form_generator.field.FormField;
-import com.form_generator.type.FormType;
+import com.form_generator.form.field.FormField;
 import com.form_generator.entity.Entity;
 import com.form_generator.entity.EntityBean;
 
 /**
  * Created by david on 4/29/17.
  */
-public class ListFormType implements FormType {
+public class ListFormFieldType implements FormFieldType {
 
-    private final FormType listFormType;
+    private final FormFieldType listFormFieldType;
 
     private static final String template =
             "<div class=\"panel panel-default\">\n" +
@@ -59,7 +58,7 @@ public class ListFormType implements FormType {
         // TODO render correctly fields that are not entities
         Entity fieldListEntity;
         try {
-            fieldListEntity = formField.getFormType().getListFormType().getEntity();
+            fieldListEntity = formField.getFormFieldType().getListFormFieldType().getEntity();
         } catch (InvalidOperationException ex) {
             fieldListEntity = new EntityBean("id", "name");
         }
@@ -74,12 +73,12 @@ public class ListFormType implements FormType {
                 );
     }
 
-    public ListFormType(FormType listFormType) {
-        this.listFormType = listFormType;
+    public ListFormFieldType(FormFieldType listFormFieldType) {
+        this.listFormFieldType = listFormFieldType;
     }
 
     @Override
-    public FormType getListFormType() {
-        return listFormType;
+    public FormFieldType getListFormFieldType() {
+        return listFormFieldType;
     }
 }

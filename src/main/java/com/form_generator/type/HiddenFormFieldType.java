@@ -1,12 +1,11 @@
 package com.form_generator.type;
 
-import com.form_generator.field.FormField;
-import com.form_generator.type.FormType;
+import com.form_generator.form.field.FormField;
 
 /**
  * Created by david on 5/3/17.
  */
-public class HiddenFormType implements FormType {
+public class HiddenFormFieldType implements FormFieldType {
 
     private final static String template = "<input class=\"form-control\" type=\"hidden\" th:name=\"%s\"/>";
 

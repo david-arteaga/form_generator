@@ -2,27 +2,26 @@ package com.form_generator.type;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;
-import com.form_generator.field.FormField;
-import com.form_generator.type.FormType;
+import com.form_generator.form.field.FormField;
 import com.form_generator.entity.Entity;
 import com.form_generator.entity.EntityBean;
 
 /**
  * Created by david on 4/29/17.
  */
-public class EntityFormType implements FormType {
+public class EntityFormFieldType implements FormFieldType {
 
     private final Entity entity;
 
-    public EntityFormType(FormEntity formEntityAnnotation) {
+    public EntityFormFieldType(FormEntity formEntityAnnotation) {
         this(new EntityBean(formEntityAnnotation));
     }
 
-    public EntityFormType(PredefinedType predefinedTypeAnnotation) {
+    public EntityFormFieldType(PredefinedType predefinedTypeAnnotation) {
         this(new EntityBean(predefinedTypeAnnotation));
     }
 
-    public EntityFormType(Entity entity) {
+    public EntityFormFieldType(Entity entity) {
         this.entity = entity;
     }
 
@@ -40,7 +39,7 @@ public class EntityFormType implements FormType {
 
     @Override
     public String renderField(FormField formField) {
-        Entity entity = formField.getFormType().getEntity();
+        Entity entity = formField.getFormFieldType().getEntity();
         String idFieldName = entity.getIdFieldName();
         return String.format(template,
                 formField.getFieldSingularName(),

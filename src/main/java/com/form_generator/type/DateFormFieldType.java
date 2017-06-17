@@ -1,18 +1,17 @@
 package com.form_generator.type;
 
-import com.form_generator.field.FormField;
-import com.form_generator.type.FormType;
+import com.form_generator.form.field.FormField;
 
 import java.time.*;
 
 /**
  * Created by david on 5/1/17.
  */
-public class DateFormType implements FormType {
+public class DateFormFieldType implements FormFieldType {
 
     private final DateInputType dateInputType;
 
-    public DateFormType(DateInputType dateInputType) {
+    public DateFormFieldType(DateInputType dateInputType) {
         this.dateInputType = dateInputType;
     }
 
