@@ -2,7 +2,7 @@ package com.form_generator.type;
 
 import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.field.FormField;
-import com.form_generator.type.entity.Entity;
+import com.form_generator.entity.Entity;
 
 /**
  * Created by david on 4/29/17.

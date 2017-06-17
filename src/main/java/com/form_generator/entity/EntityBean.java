@@ -1,4 +1,4 @@
-package com.form_generator.type.entity;
+package com.form_generator.entity;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;

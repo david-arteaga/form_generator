@@ -1,8 +1,8 @@
-package com.form_generator.type.check;
+package com.form_generator.check;
 
 import com.form_generator.type.FormType;
 import com.form_generator.type.FormTypeManager;
-import com.form_generator.type.base.StringFormType;
+import com.form_generator.type.StringFormType;
 import com.form_generator.type.utils.ElementTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;

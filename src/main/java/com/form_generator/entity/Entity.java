@@ -1,4 +1,4 @@
-package com.form_generator.type.entity;
+package com.form_generator.entity;
 
 /**
  * Created by david on 4/29/17.

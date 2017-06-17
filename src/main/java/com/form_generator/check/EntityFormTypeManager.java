@@ -1,10 +1,10 @@
-package com.form_generator.type.check;
+package com.form_generator.check;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;
 import com.form_generator.type.FormType;
 import com.form_generator.type.FormTypeManager;
-import com.form_generator.type.base.EntityFormType;
+import com.form_generator.type.EntityFormType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;

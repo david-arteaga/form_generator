@@ -1,16 +1,14 @@
-package com.form_generator.type.check;
+package com.form_generator.check;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.ListTypeReferencesFormEntity;
-import com.form_generator.annotation.ReferencesFormEntity;
 import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.type.FormType;
 import com.form_generator.type.FormTypeManager;
-import com.form_generator.type.base.EntityFormType;
-import com.form_generator.type.base.ListFormType;
-import com.form_generator.type.base.StringFormType;
+import com.form_generator.type.EntityFormType;
+import com.form_generator.type.ListFormType;
+import com.form_generator.type.StringFormType;
 import com.form_generator.type.utils.AnnotationUtils;
-import com.form_generator.type.utils.DeclaredTypeUtils;
 import com.form_generator.type.utils.ElementTypeUtils;
 
 import javax.annotation.processing.Messager;
@@ -20,7 +18,6 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**

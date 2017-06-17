@@ -1,4 +1,4 @@
-package com.form_generator.type.base;
+package com.form_generator.type;
 
 import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;

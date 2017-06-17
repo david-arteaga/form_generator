@@ -1,10 +1,10 @@
-package com.form_generator.type.base;
+package com.form_generator.type;
 
 import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;
-import com.form_generator.type.entity.Entity;
-import com.form_generator.type.entity.EntityBean;
+import com.form_generator.entity.Entity;
+import com.form_generator.entity.EntityBean;
 
 /**
  * Created by david on 4/29/17.

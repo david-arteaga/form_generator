@@ -1,8 +1,8 @@
-package com.form_generator.type.check;
+package com.form_generator.check;
 
 import com.form_generator.type.FormType;
 import com.form_generator.type.FormTypeManager;
-import com.form_generator.type.base.DateFormType;
+import com.form_generator.type.DateFormType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;
@@ -36,7 +36,7 @@ public class DateFormTypeManager implements FormTypeManager {
         }
 
         env.getMessager().printMessage(Diagnostic.Kind.ERROR,
-                "Oops! This is our mistake. Criteria for generating inputs of type 'date' and related includes types that have not been implemented in 'com.form_generator.type.base.DateFormType.DateInputType'. A input of type 'date' will be generated for type '" + declaredType.toString() + "'.");
+                "Oops! This is our mistake. Criteria for generating inputs of type 'date' and related includes types that have not been implemented in 'com.form_generator.type.DateFormType.DateInputType'. A input of type 'date' will be generated for type '" + declaredType.toString() + "'.");
         return new DateFormType(DateFormType.DateInputType.DATE);
     }
 }

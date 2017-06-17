@@ -2,12 +2,13 @@ package com.form_generator.type.utils;
 
 import com.form_generator.annotation.FormHidden;
 import com.form_generator.annotation.ReferencesFormEntity;
+import com.form_generator.check.*;
 import com.form_generator.field.DefaultFormField;
 import com.form_generator.field.FormField;
 import com.form_generator.type.FormType;
 import com.form_generator.type.FormTypeManager;
-import com.form_generator.type.base.*;
-import com.form_generator.type.check.*;
+import com.form_generator.type.HiddenFormType;
+import com.form_generator.type.StringFormType;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.AnnotatedConstruct;
