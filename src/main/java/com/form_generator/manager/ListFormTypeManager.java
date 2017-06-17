@@ -1,10 +1,9 @@
-package com.form_generator.check;
+package com.form_generator.manager;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.ListTypeReferencesFormEntity;
 import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.type.FormType;
-import com.form_generator.type.FormTypeManager;
 import com.form_generator.type.EntityFormType;
 import com.form_generator.type.ListFormType;
 import com.form_generator.type.StringFormType;

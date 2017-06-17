@@ -1,4 +1,4 @@
-package com.form_generator.annotation.processor;
+package com.form_generator.processor;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormIgnore;

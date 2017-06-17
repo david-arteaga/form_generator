@@ -1,4 +1,6 @@
-package com.form_generator.type;
+package com.form_generator.manager;
+
+import com.form_generator.type.FormType;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;

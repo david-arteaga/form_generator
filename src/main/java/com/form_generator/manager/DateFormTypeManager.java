@@ -1,7 +1,6 @@
-package com.form_generator.check;
+package com.form_generator.manager;
 
 import com.form_generator.type.FormType;
-import com.form_generator.type.FormTypeManager;
 import com.form_generator.type.DateFormType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 
