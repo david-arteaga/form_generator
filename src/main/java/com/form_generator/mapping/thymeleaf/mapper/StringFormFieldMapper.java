@@ -18,7 +18,7 @@ public class StringFormFieldMapper implements FormFieldMapper<StringFormFieldTyp
 
         InputHtmlElement input = new InputHtmlElement()
                 .addAttribute("type", "text")
-                .addAttribute("th:field", "*{" + formField.getFieldSingularName() + "}")
+                .setFieldName(formField.getFieldSingularName())
                 .addAttribute("placeholder", formField.getFieldSingularLabel())
                 .addAttribute("class", "form-control");
         formGroup.appendChild(input);

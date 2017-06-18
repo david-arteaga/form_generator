@@ -25,9 +25,9 @@ public class BooleanFormFieldMapper implements FormFieldMapper<BooleanFormFieldT
         label.addAttribute("class", "control-label");
         checkboxDiv.appendChild(label);
 
-        HtmlElement input = new InputHtmlElement();
-        input.addAttribute("th:field", "*{" + formField.getFieldSingularName() + "}");
-        input.addAttribute("type", "checkbox");
+        HtmlElement input = new InputHtmlElement()
+                .setFieldName(formField.getFieldSingularName())
+                .addAttribute("type", "checkbox");
 
         label.appendChild(input);
         label.appendChild(new TextNode(formField.getFieldSingularLabel()));

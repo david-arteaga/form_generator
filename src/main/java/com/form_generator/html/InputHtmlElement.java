@@ -28,6 +28,10 @@ public class InputHtmlElement extends HtmlElement {
         return new RenderedHtmlElement(getTag(), sb.toString());
     }
 
+    public InputHtmlElement setFieldName(String name) {
+        return addAttribute("th:field", "*{" + name + "}");
+    }
+
     @Override
     public InputHtmlElement addAttribute(String attribute, String value) {
         return (InputHtmlElement) super.addAttribute(attribute, value);
