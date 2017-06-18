@@ -35,6 +35,10 @@ public class DateFormFieldType implements FormFieldType {
         return mapper.mapField(formField, this);
     }
 
+    public DateInputType getDateInputType() {
+        return dateInputType;
+    }
+
     public enum DateInputType {
         DATE("date", LocalDate.class),
         TIME("time", LocalTime.class),
