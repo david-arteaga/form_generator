@@ -2,6 +2,7 @@ package com.form_generator.mapping.thymeleaf.mapper;
 
 import com.form_generator.form.field.FormField;
 import com.form_generator.html.HtmlElement;
+import com.form_generator.html.InputHtmlElement;
 import com.form_generator.mapping.FormFieldMapper;
 import com.form_generator.type.NumberFormFieldType;
 
@@ -12,8 +13,17 @@ public class NumberFormFieldMapper implements FormFieldMapper<NumberFormFieldTyp
 
     @Override
     public HtmlElement mapField(FormField formField, NumberFormFieldType formFieldType) {
-        throw new UnsupportedOperationException();
-    }
+        HtmlElement formGroup = new HtmlElement("div")
+                .addAttribute("class", "form-group");
 
+        InputHtmlElement input = new InputHtmlElement()
+                .addAttribute("type", "number")
+                .addAttribute("th:field", "*{" + formField.getFieldSingularName() + "}")
+                .addAttribute("placeholder", formField.getFieldSingularLabel())
+                .addAttribute("class", "form-control");
+        formGroup.appendChild(input);
+
+        return formGroup;
+    }
 
 }

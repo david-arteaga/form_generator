@@ -26,19 +26,4 @@ public class StringFormFieldMapper implements FormFieldMapper<StringFormFieldTyp
         return formGroup;
     }
 
-    private final static String template =
-            "<div class=\"form-group\">\n" +
-                    "    <input " +
-                    "type=\"text\" " +
-                    "name=\"%s\" " +
-                    "placeholder=\"%s\" " +
-                    "class=\"form-control\" " +
-                    "/>\n" +
-                    "</div>";
-
-    public String renderField(FormField formField) {
-        return String.format(template,
-                formField.getFieldSingularName(), formField.getFieldSingularLabel());
-    }
-
 }
