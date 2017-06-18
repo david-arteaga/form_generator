@@ -12,7 +12,7 @@ import javax.lang.model.type.TypeMirror;
 /**
  * Created by david on 5/4/17.
  */
-public class NumberFormTypeManager implements FormTypeManager {
+public class NumberFormTypeManager implements FormTypeManager<NumberFormFieldType> {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         TypeKind typeKind = typeMirror.getKind();
@@ -33,7 +33,7 @@ public class NumberFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public NumberFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         return new NumberFormFieldType();
     }
 }

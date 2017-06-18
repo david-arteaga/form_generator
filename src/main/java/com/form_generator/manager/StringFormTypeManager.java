@@ -11,14 +11,14 @@ import javax.lang.model.type.TypeMirror;
 /**
  * Created by david on 5/4/17.
  */
-public class StringFormTypeManager implements FormTypeManager {
+public class StringFormTypeManager implements FormTypeManager<StringFormFieldType> {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         return ElementTypeUtils.typeImplementsClass(typeMirror, String.class, env);
     }
 
     @Override
-    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public StringFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         return new StringFormFieldType();
     }
 }

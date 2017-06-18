@@ -14,7 +14,7 @@ import java.util.Arrays;
 /**
  * Created by david on 5/8/17.
  */
-public class DateFormTypeManager implements FormTypeManager {
+public class DateFormTypeManager implements FormTypeManager<DateFormFieldType> {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         return Arrays.stream(DateFormFieldType.DateInputType.values())
@@ -25,7 +25,7 @@ public class DateFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public DateFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         DeclaredType declaredType = (DeclaredType) typeMirror;
 
         for (DateFormFieldType.DateInputType inputType: DateFormFieldType.DateInputType.values()) {

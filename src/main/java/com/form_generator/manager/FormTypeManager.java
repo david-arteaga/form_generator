@@ -9,7 +9,7 @@ import javax.lang.model.type.TypeMirror;
 /**
  * Created by david on 5/4/17.
  */
-public interface FormTypeManager {
+public interface FormTypeManager<T extends FormFieldType> {
     boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element);
-    FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element);
+    T getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element);
 }

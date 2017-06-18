@@ -2,8 +2,12 @@ package com.form_generator.processor;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormIgnore;
+import com.form_generator.form.Form;
 import com.form_generator.form.field.FormField;
-import com.form_generator.render.Render;
+import com.form_generator.html.FormHtmlElement;
+import com.form_generator.mapping.Mapping;
+import com.form_generator.mapping.thymeleaf.ThymeleafMapping;
+import com.form_generator.rendered.RenderedForm;
 import com.form_generator.type.utils.ElementTypeUtils;
 import com.google.auto.service.AutoService;
 
@@ -42,48 +46,73 @@ public class EntityProcessor extends AbstractProcessor {
      */
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+
         for (TypeElement annotationType: annotations) {
 
             // get classes annotated with @FormEntity
             Set<? extends TypeElement> annotatedClasses = roundEnv.getElementsAnnotatedWith(annotationType).stream()
                     .map(e -> (TypeElement) e)
-                    .filter(this::shouldGenerateForm)
                     .collect(Collectors.toSet());
 
+            Mapping mapping = new ThymeleafMapping();
 
+            List<RenderedForm> renderedForms = getFormsForElements(annotatedClasses, mapping);
 
-            for (TypeElement typeElement: annotatedClasses) {
-
-                List<Element> elements = getElementsForClass(typeElement);
-
-                List<FormField> formFields = ElementTypeUtils.getFormFieldsForElements(elements, processingEnv);
-
-                String formHtml = Render.formWithFields(formFields);
-
-                try {
-                    Filer filer = processingEnv.getFiler();
-                    FileObject file = filer.createResource(StandardLocation.SOURCE_OUTPUT, "resources.main.templates", typeElement.getSimpleName() + "Form.html");
-                    try (Writer out = file.openWriter()) {
-                        out.write(formHtml);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
+            generateFilesForForms(renderedForms);
 
         }
+
         return false;
     }
 
+    private void generateFilesForForms(List<RenderedForm> renderedForms) {
+        Filer filer = processingEnv.getFiler();
+        renderedForms.forEach(renderedForm -> {
+            try {
+                FileObject file = filer.createResource(StandardLocation.SOURCE_OUTPUT, "resources.main.templates",
+                        renderedForm.getName() + "Form.html");
+                try (Writer out = file.openWriter()) {
+                    out.write(renderedForm.getRenderedHtmlElement().getHtml());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private List<RenderedForm> getFormsForElements(Collection<? extends TypeElement> _typeElements, Mapping mapping) {
+        List<? extends TypeElement> typeElements = _typeElements.stream()
+                .filter(this::shouldGenerateForm)
+                .collect(Collectors.toList());
+
+        List<Form> forms = typeElements.stream()
+                .map(te -> new Form(te.getSimpleName().toString(), getFormFieldsForTypeElement(te)) )
+                .collect(Collectors.toList());
+
+        List<FormHtmlElement> formHtmlElements = forms.stream()
+                .map(f -> f.map(mapping))
+                .collect(Collectors.toList());
+
+        List<RenderedForm> renderedForms = formHtmlElements.stream()
+                .map(FormHtmlElement::renderFormHtmlElement)
+                .collect(Collectors.toList());
+
+        return renderedForms;
+    }
+
+    private List<FormField> getFormFieldsForTypeElement(TypeElement typeElement) {
+        List<Element> elements = getElementsForClass(typeElement);
+
+        return ElementTypeUtils.getFormFieldsForElements(elements, processingEnv);
+    }
+
     private  boolean shouldGenerateForm(TypeElement e) {
-        return !e.getAnnotation(FormEntity.class).generateForm();
+        return e.getAnnotation(FormEntity.class).generateForm();
     }
 
     private List<Element> getElementsForClass(TypeElement clazz) {
         return clazz.getEnclosedElements().stream()
-                //.peek(e -> processingEnv.getMessager().printMessage(Diagnostic.Kind.OTHER, e.getSimpleName()))
                 .filter(e -> e.getKind().isField())
                 .filter(this::notIgnored)
                 .map(VariableElement.class::cast)

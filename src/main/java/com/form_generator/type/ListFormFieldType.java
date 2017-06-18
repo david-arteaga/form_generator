@@ -4,6 +4,9 @@ import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.form.field.FormField;
 import com.form_generator.entity.Entity;
 import com.form_generator.entity.EntityBean;
+import com.form_generator.html.HtmlElement;
+import com.form_generator.mapping.FormFieldMapper;
+import com.form_generator.mapping.Mapping;
 
 /**
  * Created by david on 4/29/17.
@@ -55,7 +58,7 @@ public class ListFormFieldType implements FormFieldType {
 
     @Override
     public String renderField(FormField formField) {
-        // TODO render correctly fields that are not entities
+        // TODO rendered correctly fields that are not entities
         Entity fieldListEntity;
         try {
             fieldListEntity = formField.getFormFieldType().getListFormFieldType().getEntity();
@@ -71,6 +74,12 @@ public class ListFormFieldType implements FormFieldType {
                 formField.getFieldSingularName(), fieldListEntity.getIdFieldName(), // (5)
                 formField.getFieldSingularName(), fieldListEntity.getNameFieldName()
                 );
+    }
+
+    @Override
+    public HtmlElement map(FormField formField, Mapping mapping) {
+        FormFieldMapper<ListFormFieldType> mapper = mapping.getMapper(this);
+        return mapper.mapField(formField, this);
     }
 
     public ListFormFieldType(FormFieldType listFormFieldType) {

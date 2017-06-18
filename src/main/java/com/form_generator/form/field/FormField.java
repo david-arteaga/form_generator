@@ -1,5 +1,7 @@
 package com.form_generator.form.field;
 
+import com.form_generator.html.HtmlElement;
+import com.form_generator.mapping.Mapping;
 import com.form_generator.type.FormFieldType;
 
 /**
@@ -14,4 +16,6 @@ public interface FormField {
     FormFieldType getFormFieldType();
 
     String getFieldSingularLabel();
+
+    HtmlElement map(Mapping mapping);
 }

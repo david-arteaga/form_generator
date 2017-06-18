@@ -1,5 +1,6 @@
 package com.form_generator.manager;
 
+import com.form_generator.type.BooleanFormFieldType;
 import com.form_generator.type.FormFieldType;
 import com.form_generator.type.NumberFormFieldType;
 import com.form_generator.type.utils.ElementTypeUtils;
@@ -12,7 +13,7 @@ import javax.lang.model.type.TypeMirror;
 /**
  * Created by david on 5/8/17.
  */
-public class BooleanFormTypeManager implements FormTypeManager {
+public class BooleanFormTypeManager implements FormTypeManager<BooleanFormFieldType> {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         TypeKind typeKind = typeMirror.getKind();
@@ -28,7 +29,7 @@ public class BooleanFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        return new NumberFormFieldType();
+    public BooleanFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+        return new BooleanFormFieldType();
     }
 }

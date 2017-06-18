@@ -15,7 +15,7 @@ import javax.lang.model.type.TypeMirror;
 /**
  * Created by david on 5/8/17.
  */
-public class EntityFormTypeManager implements FormTypeManager {
+public class EntityFormTypeManager implements FormTypeManager<EntityFormFieldType> {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         TypeKind typeKind = typeMirror.getKind();
@@ -28,8 +28,7 @@ public class EntityFormTypeManager implements FormTypeManager {
     }
 
     @Override
-    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        // TODO
+    public EntityFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         PredefinedType predefinedTypeAnnotation = element.getAnnotation(PredefinedType.class);
         if (predefinedTypeAnnotation != null) {
             return new EntityFormFieldType(predefinedTypeAnnotation);

@@ -26,7 +26,6 @@ public class AnnotationUtils {
         return env.getTypeUtils().getDeclaredType(env.getElementUtils().getTypeElement(annotationValue.getValue().toString()));
     }
 
-    @SuppressWarnings("unchecked")
     public static Optional<AnnotationValue> getAnnotationValue(AnnotationMirror annotationMirror, String key) {
         return annotationMirror.getElementValues().entrySet().stream()
                 .filter(e -> e.getKey().getSimpleName().toString().equals(key))

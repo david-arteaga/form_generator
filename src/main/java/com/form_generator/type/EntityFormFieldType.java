@@ -5,6 +5,9 @@ import com.form_generator.annotation.PredefinedType;
 import com.form_generator.form.field.FormField;
 import com.form_generator.entity.Entity;
 import com.form_generator.entity.EntityBean;
+import com.form_generator.html.HtmlElement;
+import com.form_generator.mapping.FormFieldMapper;
+import com.form_generator.mapping.Mapping;
 
 /**
  * Created by david on 4/29/17.
@@ -47,6 +50,12 @@ public class EntityFormFieldType implements FormFieldType {
                 formField.getFieldSingularName(), formField.getFieldPluralName(),
                 formField.getFieldSingularName(), idFieldName,
                 formField.getFieldSingularName(), entity.getNameFieldName());
+    }
+
+    @Override
+    public HtmlElement map(FormField formField, Mapping mapping) {
+        FormFieldMapper<EntityFormFieldType> mapper = mapping.getMapper(this);
+        return mapper.mapField(formField, this);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.form_generator.type;
 
 import com.form_generator.form.field.FormField;
+import com.form_generator.html.HtmlElement;
+import com.form_generator.mapping.FormFieldMapper;
+import com.form_generator.mapping.Mapping;
 
 import java.time.*;
 
@@ -26,6 +29,12 @@ public class DateFormFieldType implements FormFieldType {
                 dateInputType.getName(), formField.getFieldSingularName(), formField.getFieldSingularLabel());
     }
 
+    @Override
+    public HtmlElement map(FormField formField, Mapping mapping) {
+        FormFieldMapper<DateFormFieldType> mapper = mapping.getMapper(this);
+        return mapper.mapField(formField, this);
+    }
+
     public enum DateInputType {
         DATE("date", LocalDate.class),
         TIME("time", LocalTime.class),
@@ -34,6 +43,7 @@ public class DateFormFieldType implements FormFieldType {
 
         private final String name;
         private final Class<?> dateClass;
+
         DateInputType(String name, Class<?> dateClass) {
             this.name = name;
             this.dateClass = dateClass;

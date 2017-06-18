@@ -1,5 +1,7 @@
 package com.form_generator.form.field;
 
+import com.form_generator.html.HtmlElement;
+import com.form_generator.mapping.Mapping;
 import com.form_generator.type.FormFieldType;
 
 import javax.lang.model.element.Element;
@@ -70,5 +72,10 @@ public class DefaultFormField implements FormField {
     @Override
     public String getFieldSingularLabel() {
         return fieldSingularLabel;
+    }
+
+    @Override
+    public HtmlElement map(Mapping mapping) {
+        return formFieldType.map(this, mapping);
     }
 }

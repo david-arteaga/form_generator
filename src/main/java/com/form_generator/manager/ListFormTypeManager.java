@@ -21,14 +21,14 @@ import java.util.Optional;
 /**
  * Created by david on 5/8/17.
  */
-public class ListFormTypeManager implements FormTypeManager {
+public class ListFormTypeManager implements FormTypeManager<ListFormFieldType> {
     @Override
     public boolean check(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         return ElementTypeUtils.typeImplementsClass(typeMirror, List.class, env);
     }
 
     @Override
-    public FormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+    public ListFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
         DeclaredType listType = (DeclaredType) typeMirror;
         List<? extends TypeMirror> listParams = listType.getTypeArguments();
         FormFieldType listFormFieldType;
