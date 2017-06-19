@@ -67,8 +67,26 @@ public class ElementTypeUtils {
                 .map(e -> new DefaultFormField(e, getReferencedFormType(e, env, manager)))
                 .collect(Collectors.toList());
 
-        return concat(hiddenFields.stream(), nonHiddenFields.stream(), referencingFields.stream()).collect(Collectors.toList());
+        return elements.stream()
+                .map(e -> getFormFieldForElement(e, env))
+                .collect(Collectors.toList());
 
+        //return concat(hiddenFields.stream(), nonHiddenFields.stream(), referencingFields.stream()).collect(Collectors.toList());
+
+    }
+
+    private static FormField getFormFieldForElement(Element element, ProcessingEnvironment env) {
+        if (isHidden(element)) {
+            return new DefaultFormField(element, new HiddenFormFieldType());
+        }
+
+        if (doesNotReferenceEntity(element)) {
+            return new DefaultFormField(element, getDefault(element.asType(), env, element));
+        }
+
+        // not hidden and has @ReferencesFormEntity
+        EntityFormTypeManager manager = new EntityFormTypeManager();
+        return new DefaultFormField(element, getReferencedFormType(element, env, manager));
     }
 
     /**

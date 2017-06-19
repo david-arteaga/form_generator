@@ -3,6 +3,7 @@ package com.form_generator.html;
 import com.form_generator.rendered.RenderedForm;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by david on 6/17/17.
@@ -11,7 +12,7 @@ public class FormHtmlElement extends HtmlElement {
 
     private final String name;
 
-    public FormHtmlElement(String name, Collection<HtmlElement> children) {
+    public FormHtmlElement(String name, List<HtmlElement> children) {
         super("form");
         this.name = !name.isEmpty() ? name : "_____";
         children.forEach(super::appendChild);
