@@ -1,6 +1,5 @@
 package com.form_generator.manager;
 
-import com.form_generator.type.FormFieldType;
 import com.form_generator.type.StringFormFieldType;
 import com.form_generator.type.utils.ElementTypeUtils;
 

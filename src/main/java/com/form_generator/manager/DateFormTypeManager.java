@@ -1,7 +1,6 @@
 package com.form_generator.manager;
 
 import com.form_generator.type.DateFormFieldType;
-import com.form_generator.type.FormFieldType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;

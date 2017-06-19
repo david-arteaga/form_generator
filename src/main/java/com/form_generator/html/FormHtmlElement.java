@@ -2,7 +2,6 @@ package com.form_generator.html;
 
 import com.form_generator.rendered.RenderedForm;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

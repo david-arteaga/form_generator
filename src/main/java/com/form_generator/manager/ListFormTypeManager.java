@@ -2,16 +2,18 @@ package com.form_generator.manager;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.ListTypeReferencesFormEntity;
-import com.form_generator.exception.InvalidOperationException;
-import com.form_generator.type.*;
 import com.form_generator.type.EntityFormFieldType;
+import com.form_generator.type.FormFieldType;
 import com.form_generator.type.ListFormFieldType;
+import com.form_generator.type.StringFormFieldType;
 import com.form_generator.type.utils.AnnotationUtils;
 import com.form_generator.type.utils.ElementTypeUtils;
 
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.lang.model.element.*;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;

@@ -2,9 +2,9 @@ package com.form_generator.type;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;
-import com.form_generator.form.field.FormField;
 import com.form_generator.entity.Entity;
 import com.form_generator.entity.EntityBean;
+import com.form_generator.form.field.FormField;
 import com.form_generator.html.HtmlElement;
 import com.form_generator.mapping.FormFieldMapper;
 import com.form_generator.mapping.Mapping;

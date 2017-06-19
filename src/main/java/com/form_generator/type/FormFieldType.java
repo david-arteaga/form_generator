@@ -1,8 +1,8 @@
 package com.form_generator.type;
 
+import com.form_generator.entity.Entity;
 import com.form_generator.exception.InvalidOperationException;
 import com.form_generator.form.field.FormField;
-import com.form_generator.entity.Entity;
 import com.form_generator.html.HtmlElement;
 import com.form_generator.mapping.Mapping;
 

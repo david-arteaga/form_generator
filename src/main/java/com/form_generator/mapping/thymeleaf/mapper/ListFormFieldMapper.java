@@ -9,7 +9,6 @@ import com.form_generator.html.TextNode;
 import com.form_generator.mapping.FormFieldMapper;
 import com.form_generator.mapping.thymeleaf.ThymeleafMapping;
 import com.form_generator.mapping.thymeleaf.html.HtmlUtils;
-import com.form_generator.type.EntityFormFieldType;
 import com.form_generator.type.FormFieldType;
 import com.form_generator.type.ListFormFieldType;
 

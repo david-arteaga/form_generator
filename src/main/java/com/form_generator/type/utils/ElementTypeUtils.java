@@ -1,15 +1,13 @@
 package com.form_generator.type.utils;
 
-import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormHidden;
 import com.form_generator.annotation.ReferencesFormEntity;
 import com.form_generator.exception.InvalidEntityReferenceException;
-import com.form_generator.manager.*;
 import com.form_generator.form.field.DefaultFormField;
 import com.form_generator.form.field.FormField;
+import com.form_generator.manager.*;
 import com.form_generator.type.EntityFormFieldType;
 import com.form_generator.type.FormFieldType;
-import com.form_generator.manager.FormTypeManager;
 import com.form_generator.type.HiddenFormFieldType;
 import com.form_generator.type.StringFormFieldType;
 
@@ -21,10 +19,11 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Utilities class to get {@link FormFieldType} objects from a {@link Element} object, which should represent a class field.

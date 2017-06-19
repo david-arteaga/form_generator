@@ -1,8 +1,6 @@
 package com.form_generator.manager;
 
 import com.form_generator.type.BooleanFormFieldType;
-import com.form_generator.type.FormFieldType;
-import com.form_generator.type.NumberFormFieldType;
 import com.form_generator.type.utils.ElementTypeUtils;
 
 import javax.annotation.processing.ProcessingEnvironment;

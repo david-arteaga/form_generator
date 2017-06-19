@@ -2,7 +2,6 @@ package com.form_generator.manager;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.PredefinedType;
-import com.form_generator.type.FormFieldType;
 import com.form_generator.type.EntityFormFieldType;
 import com.form_generator.type.utils.DeclaredTypeUtils;
 

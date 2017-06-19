@@ -2,9 +2,6 @@ package com.form_generator.html;
 
 import com.form_generator.rendered.RenderedHtmlElement;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by david on 6/17/17.
  */

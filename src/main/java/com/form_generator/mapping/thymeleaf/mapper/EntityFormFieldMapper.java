@@ -4,8 +4,8 @@ import com.form_generator.entity.Entity;
 import com.form_generator.form.field.FormField;
 import com.form_generator.html.HtmlElement;
 import com.form_generator.html.TextNode;
-import com.form_generator.mapping.thymeleaf.html.SelectHtmlElement;
 import com.form_generator.mapping.FormFieldMapper;
+import com.form_generator.mapping.thymeleaf.html.SelectHtmlElement;
 import com.form_generator.type.EntityFormFieldType;
 
 /**
