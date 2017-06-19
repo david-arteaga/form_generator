@@ -13,7 +13,6 @@ public class DateFormFieldMapper implements FormFieldMapper<DateFormFieldType> {
 
     @Override
     public HtmlElement mapField(FormField formField, DateFormFieldType formFieldType) {
-        //TODO
         HtmlElement formGroup = new HtmlElement("div")
                 .addAttribute("class", "form-group");
 

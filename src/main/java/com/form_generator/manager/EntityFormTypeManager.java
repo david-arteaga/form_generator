@@ -11,6 +11,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import java.util.Optional;
 
 /**
  * Created by david on 5/8/17.
@@ -36,6 +37,16 @@ public class EntityFormTypeManager implements FormTypeManager<EntityFormFieldTyp
 
         FormEntity formEntityAnnotation = DeclaredTypeUtils.getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env);
         return new EntityFormFieldType(formEntityAnnotation);
+    }
+
+    public Optional<EntityFormFieldType> tryGetFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
+        PredefinedType predefinedTypeAnnotation = element.getAnnotation(PredefinedType.class);
+        if (predefinedTypeAnnotation != null) {
+            return Optional.of(new EntityFormFieldType(predefinedTypeAnnotation));
+        }
+
+        FormEntity formEntityAnnotation = DeclaredTypeUtils.getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env);
+        return formEntityAnnotation != null ? Optional.of(new EntityFormFieldType(formEntityAnnotation)) : Optional.empty();
     }
 
 }

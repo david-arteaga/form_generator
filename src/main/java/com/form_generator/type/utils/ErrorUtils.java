@@ -15,7 +15,8 @@ class ErrorUtils {
         String enclosingClass = fieldElement.getEnclosingElement().getSimpleName().toString();
         String fieldName = fieldElement.getSimpleName().toString();
         String fieldType = typeElement.getQualifiedName().toString();
-        messager.printMessage(ERROR, "FormFieldType '" + fieldType + "' used in field '" + fieldName + "' in class '" + enclosingClass + "' is not annotated with @FormEntity. A input of type text will be generated for fields of this type.");
+        messager.printMessage(ERROR, "FormFieldType '" + fieldType + "' used in field '" + fieldName + "' in class '" + enclosingClass
+                + "' is not annotated with @FormEntity. Please annotate it with @EntityForm or specify the name of the 'id' and 'name' fields using @PredefinedType.");
     }
 
     static void typeNotMappedError(TypeMirror typeMirror, Messager messager, Element fieldElement) {

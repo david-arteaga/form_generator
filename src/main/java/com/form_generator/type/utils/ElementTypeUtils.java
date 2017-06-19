@@ -1,10 +1,13 @@
 package com.form_generator.type.utils;
 
+import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormHidden;
 import com.form_generator.annotation.ReferencesFormEntity;
+import com.form_generator.exception.InvalidEntityReferenceException;
 import com.form_generator.manager.*;
 import com.form_generator.form.field.DefaultFormField;
 import com.form_generator.form.field.FormField;
+import com.form_generator.type.EntityFormFieldType;
 import com.form_generator.type.FormFieldType;
 import com.form_generator.manager.FormTypeManager;
 import com.form_generator.type.HiddenFormFieldType;
@@ -14,6 +17,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
@@ -56,7 +60,6 @@ public class ElementTypeUtils {
                 .map(e -> new DefaultFormField(e, getDefault(e.asType(), env, e)))
                 .collect(Collectors.toList());
 
-        // TODO for elements marked with ReferencesFormEntity
         EntityFormTypeManager manager = new EntityFormTypeManager();
         List<FormField> referencingFields = elements.stream()
                 .filter(ElementTypeUtils::isNotHidden)
@@ -100,7 +103,15 @@ public class ElementTypeUtils {
         AnnotationMirror referencesFormEntityAnnotation = AnnotationUtils.getAnnotation(element, ReferencesFormEntity.class, env).get();
         DeclaredType referencedType = AnnotationUtils.getAnnotationDeclaredTypeValue(referencesFormEntityAnnotation, "value", env);
 
-        return manager.getFormType(referencedType, env, element);
+        Optional<EntityFormFieldType> formFieldType = manager.tryGetFormType(referencedType, env, element);
+
+        // verify that entity referenced actually is annotated as @FormEntity
+        if (!formFieldType.isPresent()) {
+            ErrorUtils.missingAnnotationOnEntityError(env.getMessager(), (TypeElement) referencedType.asElement(), element);
+            throw new InvalidEntityReferenceException("Type " + referencedType.toString() + " is not a @FormEntity");
+        }
+
+        return formFieldType.get();
     }
 
     @SafeVarargs
