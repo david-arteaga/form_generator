@@ -17,5 +17,7 @@ public interface FormField {
 
     String getFieldSingularLabel();
 
+    String getFieldPluralLabel();
+
     HtmlElement map(Mapping mapping);
 }

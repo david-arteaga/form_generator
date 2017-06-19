@@ -23,22 +23,12 @@ public class TextNode extends HtmlElement {
     }
 
     @Override
-    public String getAttribute(String attribute) {
-        throw new UnsupportedOperationException("This is a text node: " + content);
-    }
-
-    @Override
     public HtmlElement addAttribute(String attribute, String value) {
         throw new UnsupportedOperationException("This is a text node: " + content);
     }
 
     @Override
-    public Map<String, String> getAttributes() {
-        throw new UnsupportedOperationException("This is a text node: " + content);
-    }
-
-    @Override
-    public List<HtmlElement> getChildren() {
+    public HtmlElement appendChild(HtmlElement child) {
         throw new UnsupportedOperationException("This is a text node: " + content);
     }
 

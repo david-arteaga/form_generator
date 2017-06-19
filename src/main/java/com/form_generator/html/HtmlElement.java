@@ -1,6 +1,5 @@
 package com.form_generator.html;
 
-import com.form_generator.html.thymeleaf.Attributeable;
 import com.form_generator.rendered.RenderedHtmlElement;
 
 import java.util.*;

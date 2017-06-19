@@ -7,6 +7,8 @@ import com.form_generator.form.field.FormField;
 import com.form_generator.html.HtmlElement;
 import com.form_generator.html.TextNode;
 import com.form_generator.mapping.FormFieldMapper;
+import com.form_generator.mapping.thymeleaf.ThymeleafMapping;
+import com.form_generator.mapping.thymeleaf.html.HtmlUtils;
 import com.form_generator.type.EntityFormFieldType;
 import com.form_generator.type.FormFieldType;
 import com.form_generator.type.ListFormFieldType;
@@ -31,7 +33,7 @@ public class ListFormFieldMapper implements FormFieldMapper<ListFormFieldType> {
         // panel heading
         HtmlElement title = new HtmlElement("h3")
                 .addAttribute("class", "panel-title")
-                .appendChild(new TextNode(formField.getFieldSingularLabel()));
+                .appendChild(new TextNode(formField.getFieldPluralLabel()));
         panelHeading.appendChild(title);
 
         // panel body
@@ -47,7 +49,7 @@ public class ListFormFieldMapper implements FormFieldMapper<ListFormFieldType> {
         // table head
         HtmlElement tableHead = new HtmlElement("thead");
         HtmlElement headRow = new HtmlElement("tr");
-        HtmlElement th = new HtmlElement("th").appendChild(new TextNode(formField.getFieldSingularLabel()));
+        HtmlElement th = new HtmlElement("th").appendChild(new TextNode(formField.getFieldPluralLabel()));
         headRow.appendChild(th).appendChild(new HtmlElement("th"));
         tableHead.appendChild(headRow);
         table.appendChild(tableHead);
@@ -58,14 +60,18 @@ public class ListFormFieldMapper implements FormFieldMapper<ListFormFieldType> {
         panelBody.appendChild(new HtmlElement("div").addAttribute("class", "table-responsive").appendChild(table));
 
         // form
-        Entity fieldListEntity;
-        try {
-            fieldListEntity = formFieldType.getListFormFieldType().getEntity();
-        } catch (InvalidOperationException ex) {
-            fieldListEntity = new EntityBean("id", "name");
-        }
+        FormFieldType listFormFieldType = formFieldType.getListFormFieldType();
+        HtmlElement inputFieldForForm = listFormFieldType.map(formField, new ThymeleafMapping());
+        HtmlUtils.removeThymeleafFields(inputFieldForForm);
         HtmlElement form = new HtmlElement("form")
-                .appendChild(new EntityFormFieldMapper().mapField(formField, new EntityFormFieldType(fieldListEntity), false));
+                .appendChild(inputFieldForForm)
+                .appendChild(new HtmlElement("div")
+                        .addAttribute("class", "form-group")
+                        .appendChild(new HtmlElement("button")
+                                .addAttribute("class", "btn btn-default")
+                                .addAttribute("type", "button")
+                                .appendChild(new TextNode("Add"))
+                        ));
 
         panelBody.appendChild(form);
 

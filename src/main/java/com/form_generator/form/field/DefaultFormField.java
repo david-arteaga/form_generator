@@ -16,6 +16,7 @@ public class DefaultFormField implements FormField {
     private final FormFieldType formFieldType;
 
     private final String fieldSingularLabel;
+    private final String fieldPluralLabel;
 
     private DefaultFormField(String fieldName, FormFieldType formFieldType) {
         if (fieldName.endsWith("s")) {
@@ -26,6 +27,7 @@ public class DefaultFormField implements FormField {
         }
         fieldSingularName = fieldName;
         fieldPluralName = getPlural(fieldName);
+        fieldPluralLabel = separateOnCaps(fieldPluralName);
 
         this.formFieldType = formFieldType;
         fieldSingularLabel = separateOnCaps(fieldName);
@@ -72,6 +74,11 @@ public class DefaultFormField implements FormField {
     @Override
     public String getFieldSingularLabel() {
         return fieldSingularLabel;
+    }
+
+    @Override
+    public String getFieldPluralLabel() {
+        return fieldPluralLabel;
     }
 
     @Override

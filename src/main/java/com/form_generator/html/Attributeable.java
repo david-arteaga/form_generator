@@ -1,4 +1,4 @@
-package com.form_generator.html.thymeleaf;
+package com.form_generator.html;
 
 import com.form_generator.html.HtmlElement;
 

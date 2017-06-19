@@ -52,15 +52,6 @@ public class ListFormTypeManager implements FormTypeManager<ListFormFieldType> {
             } else {
                 listFormFieldType = ElementTypeUtils.getDefault(listTypeMirror, env, element);
             }
-
-            try {
-                listFormFieldType.getEntity();
-            } catch (InvalidOperationException ex) {
-                env.getMessager().printMessage(Diagnostic.Kind.NOTE,
-                        "Error in element " + element.getSimpleName() + " in class " + element.getEnclosingElement().asType().toString() +
-                                ". This element uses type " + listTypeMirror.toString() + " which is not an entity." +
-                                " It is not yet supported to include lists of elements that are not entities");
-            }
         }
         return new ListFormFieldType(listFormFieldType);
     }
