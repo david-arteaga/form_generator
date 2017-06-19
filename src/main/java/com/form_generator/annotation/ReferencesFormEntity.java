@@ -7,6 +7,8 @@ import java.lang.annotation.*;
  * This is intended to be used on elements that are of a primitive type, which represent the id used for an entity.
  * The main use case would be for an element in a class used to represent the value directly returned from an HTML form.
  * When processing this annotation, the actual element type will not be considered.
+ * If an annotation of type {@link PredefinedType}, the values specified in this annotation will take precedence over the actual
+ * declaration of the element type.
  * Created by david on 5/8/17.
  */
 
