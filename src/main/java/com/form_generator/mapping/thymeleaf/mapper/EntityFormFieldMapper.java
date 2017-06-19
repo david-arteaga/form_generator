@@ -15,15 +15,19 @@ public class EntityFormFieldMapper implements FormFieldMapper<EntityFormFieldTyp
 
     @Override
     public HtmlElement mapField(FormField formField, EntityFormFieldType formFieldType) {
-        Entity entity = formField.getFormFieldType().getEntity();
+        return mapField(formField, formFieldType, true);
+    }
+
+    public HtmlElement mapField(FormField formField, EntityFormFieldType formFieldType, boolean isFormField) {
+        Entity entity = formFieldType.getEntity();
         String idFieldName = entity.getIdFieldName();
 
         HtmlElement formGroup = new HtmlElement("div")
                 .addAttribute("class", "form-group");
 
-        HtmlElement select = new SelectHtmlElement()
-                .setFieldName(formField.getFieldSingularName())
-                .addAttribute("class", "form-control");
+        SelectHtmlElement select = new SelectHtmlElement();
+        if (isFormField) select.setFieldName(formField.getFieldSingularName());
+        select.addAttribute("class", "form-control");
         formGroup.appendChild(select);
 
         HtmlElement defaultOption = new HtmlElement("option")

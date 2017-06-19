@@ -23,6 +23,6 @@ class ErrorUtils {
         String enclosingClass = fieldElement.getEnclosingElement().getSimpleName().toString();
         String fieldName = fieldElement.getSimpleName().toString();
         String fieldType = typeMirror.toString();
-        messager.printMessage(ERROR, "Type '" + fieldType + "' used in field '" + fieldName + "' in class '" + enclosingClass + "' is not supported. A input of type text will be generated for fields of this type.");
+        messager.printMessage(ERROR, "Type '" + fieldType + "' used in field '" + fieldName + "' in class '" + enclosingClass + "' is not supported. It is not a @FormEntity.");
     }
 }

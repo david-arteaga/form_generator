@@ -15,7 +15,7 @@ public interface FormFieldType {
     }
 
     default FormFieldType getListFormFieldType() {
-        throw new InvalidOperationException("This type, '" + this.getClass().getCanonicalName() + "', does not represent an entity");
+        throw new InvalidOperationException("This type, '" + this.getClass().getCanonicalName() + "', does not represent a list");
     }
 
     String renderField(FormField formField);
