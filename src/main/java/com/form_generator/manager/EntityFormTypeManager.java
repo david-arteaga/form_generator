@@ -30,13 +30,7 @@ public class EntityFormTypeManager implements FormTypeManager<EntityFormFieldTyp
 
     @Override
     public EntityFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        PredefinedType predefinedTypeAnnotation = element.getAnnotation(PredefinedType.class);
-        if (predefinedTypeAnnotation != null) {
-            return new EntityFormFieldType(predefinedTypeAnnotation);
-        }
-
-        FormEntity formEntityAnnotation = DeclaredTypeUtils.getEntityAnnotationOnTypeDeclarationElement((DeclaredType) typeMirror, env);
-        return new EntityFormFieldType(formEntityAnnotation);
+        return tryGetFormType(typeMirror, env, element).get();git 
     }
 
     public Optional<EntityFormFieldType> tryGetFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
