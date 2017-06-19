@@ -76,9 +76,9 @@ public class ElementTypeUtils {
      * @return the {@link FormFieldType} that represents the element
      */
     public static FormFieldType getDefault(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        /*if (referencesEntity(typeMirror)) {
+        if (referencesEntity(typeMirror)) {
             env.getMessager().printMessage(Diagnostic.Kind.NOTE, "type " + typeMirror.toString() + " in element " + element.getSimpleName() + " in " + element.getEnclosingElement().getSimpleName() + " is annotated with ReferencesFormEntity");
-        }*/
+        }
 
         for (FormTypeManager manager: getManagers()) {
             if (manager.check(typeMirror, env, element)) {

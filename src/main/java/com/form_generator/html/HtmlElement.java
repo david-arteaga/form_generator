@@ -1,23 +1,21 @@
 package com.form_generator.html;
 
+import com.form_generator.html.thymeleaf.Attributeable;
 import com.form_generator.rendered.RenderedHtmlElement;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by david on 6/17/17.
  */
-public class HtmlElement {
+public class HtmlElement implements Attributeable {
     private final String tag;
     private final Map<String, String> attributes;
     private final List<HtmlElement> children;
 
     public HtmlElement(String tag) {
         this.tag = tag;
-        this.attributes = new HashMap<>();
+        this.attributes = new LinkedHashMap<>();
         this.children = new ArrayList<>();
     }
 
@@ -29,6 +27,7 @@ public class HtmlElement {
         return attributes.get(attribute);
     }
 
+    @Override
     public HtmlElement addAttribute(String attribute, String value) {
         attributes.put(attribute, value);
         return this;
