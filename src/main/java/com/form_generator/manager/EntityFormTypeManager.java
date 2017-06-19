@@ -30,7 +30,7 @@ public class EntityFormTypeManager implements FormTypeManager<EntityFormFieldTyp
 
     @Override
     public EntityFormFieldType getFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
-        return tryGetFormType(typeMirror, env, element).get();git 
+        return tryGetFormType(typeMirror, env, element).get();
     }
 
     public Optional<EntityFormFieldType> tryGetFormType(TypeMirror typeMirror, ProcessingEnvironment env, Element element) {
