@@ -47,32 +47,9 @@ public class ElementTypeUtils {
 
     public static List<FormField> getFormFieldsForElements(List<Element> elements, ProcessingEnvironment env) {
 
-        // hidden
-        List<FormField> hiddenFields = elements.stream()
-                .filter(ElementTypeUtils::isHidden)
-                .map(e -> new DefaultFormField(e, new HiddenFormFieldType()))
-                .collect(Collectors.toList());
-
-        // non hidden that don't have the @ReferencesFormEntity annotation
-        List<FormField> nonHiddenFields = elements.stream()
-                .filter(ElementTypeUtils::isNotHidden)
-                .filter(ElementTypeUtils::doesNotReferenceEntity)
-                .map(e -> new DefaultFormField(e, getDefault(e.asType(), env, e)))
-                .collect(Collectors.toList());
-
-        EntityFormTypeManager manager = new EntityFormTypeManager();
-        List<FormField> referencingFields = elements.stream()
-                .filter(ElementTypeUtils::isNotHidden)
-                .filter(ElementTypeUtils::referencesEntity)
-                .map(e -> new DefaultFormField(e, getReferencedFormType(e, env, manager)))
-                .collect(Collectors.toList());
-
         return elements.stream()
                 .map(e -> getFormFieldForElement(e, env))
                 .collect(Collectors.toList());
-
-        //return concat(hiddenFields.stream(), nonHiddenFields.stream(), referencingFields.stream()).collect(Collectors.toList());
-
     }
 
     private static FormField getFormFieldForElement(Element element, ProcessingEnvironment env) {
@@ -132,19 +109,6 @@ public class ElementTypeUtils {
         return formFieldType.get();
     }
 
-    @SafeVarargs
-    private static <T> Stream<T> concat(Stream<T>... streams) {
-        if (streams.length == 0) return Stream.empty();
-        if (streams.length == 1) return streams[0];
-
-        Stream<T> stream = streams[0];
-        for (int i = 1; i < streams.length; i++) {
-            stream = Stream.concat(stream, streams[i]);
-        }
-
-        return stream;
-    }
-
     /**
      * Determines if an element is marked with the annotation {@link ReferencesFormEntity}
      * @param element the element to test
@@ -170,15 +134,6 @@ public class ElementTypeUtils {
      */
     private static boolean isHidden(AnnotatedConstruct element) {
         return element.getAnnotation(FormHidden.class) != null;
-    }
-
-    /**
-     * Determines if an element is not marked with the annotation {@link FormHidden}
-     * @param element the element to test
-     * @return whether the element is not marked as {@link FormHidden}
-     */
-    private static boolean isNotHidden(AnnotatedConstruct element) {
-        return !isHidden(element);
     }
 
     /**
