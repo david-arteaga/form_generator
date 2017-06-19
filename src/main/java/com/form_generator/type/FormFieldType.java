@@ -18,7 +18,5 @@ public interface FormFieldType {
         throw new InvalidOperationException("This type, '" + this.getClass().getCanonicalName() + "', does not represent a list");
     }
 
-    String renderField(FormField formField);
-
     HtmlElement map(FormField formField, Mapping mapping);
 }

@@ -10,26 +10,10 @@ import com.form_generator.mapping.Mapping;
  */
 public class BooleanFormFieldType implements FormFieldType {
 
-    private static final String template =
-            "<div class=\"form-group\">\n" +
-                    "    <div class=\"checkbox\">\n" +
-                    "        <label class=\"control-label\">\n" +
-                    "            <input type=\"checkbox\" name=\"%s\" />" +
-                    "%s\n" +
-                    "</label>\n" +
-                    "    </div>\n" +
-                    "</div>";
-
-    @Override
-    public String renderField(FormField formField) {
-        return String.format(template,
-                formField.getFieldSingularName(),
-                formField.getFieldSingularLabel());
-    }
-
     @Override
     public HtmlElement map(FormField formField, Mapping mapping) {
         FormFieldMapper<BooleanFormFieldType> mapper = mapping.getMapper(this);
         return mapper.mapField(formField, this);
     }
+
 }

@@ -10,17 +10,10 @@ import com.form_generator.mapping.Mapping;
  */
 public class HiddenFormFieldType implements FormFieldType {
 
-    private final static String template = "<input class=\"form-control\" type=\"hidden\" th:name=\"%s\"/>";
-
-    @Override
-    public String renderField(FormField formField) {
-        return String.format(template,
-                formField.getFieldSingularName());
-    }
-
     @Override
     public HtmlElement map(FormField formField, Mapping mapping) {
         FormFieldMapper<HiddenFormFieldType> mapper = mapping.getMapper(this);
         return mapper.mapField(formField, this);
     }
+
 }

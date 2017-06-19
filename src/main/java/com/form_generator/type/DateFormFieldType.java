@@ -18,17 +18,6 @@ public class DateFormFieldType implements FormFieldType {
         this.dateInputType = dateInputType;
     }
 
-    private static final String template =
-            "<div class=\"form-group\">\n" +
-            "    <input type=\"%s\" name=\"%s\" class=\"form-control\" placeholder=\"%s\" />\n" +
-            "</div>";
-
-    @Override
-    public String renderField(FormField formField) {
-        return String.format(template,
-                dateInputType.getName(), formField.getFieldSingularName(), formField.getFieldSingularLabel());
-    }
-
     @Override
     public HtmlElement map(FormField formField, Mapping mapping) {
         FormFieldMapper<DateFormFieldType> mapper = mapping.getMapper(this);
