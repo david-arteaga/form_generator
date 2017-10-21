@@ -11,9 +11,9 @@ import com.form_generator.mapping.Mapping;
 public class NumberFormFieldType implements FormFieldType {
 
     @Override
-    public HtmlElement map(FormField formField, Mapping mapping) {
+    public HtmlElement map(FormField formField, Mapping mapping, String formName) {
         FormFieldMapper<NumberFormFieldType> mapper = mapping.getMapper(this);
-        return mapper.mapField(formField, this);
+        return mapper.mapField(formField, this, formName);
     }
 
 }

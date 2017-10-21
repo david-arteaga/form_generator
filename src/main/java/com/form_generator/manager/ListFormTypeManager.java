@@ -34,15 +34,19 @@ public class ListFormTypeManager implements FormTypeManager<ListFormFieldType> {
         DeclaredType listType = (DeclaredType) typeMirror;
         List<? extends TypeMirror> listParams = listType.getTypeArguments();
         FormFieldType listFormFieldType;
+
+        TypeElement referencedTypeElement = null;
+
         if (listParams.isEmpty()) {
             listFormFieldType = new StringFormFieldType();
         } else {
             TypeMirror listTypeMirror = listParams.get(0);
+            referencedTypeElement = env.getElementUtils().getTypeElement(listTypeMirror.toString());
 
             Optional<? extends AnnotationMirror> typeReferenceAnnotation = AnnotationUtils.getAnnotation(element, ListTypeReferencesFormEntity.class, env);
 
             if (typeReferenceAnnotation.isPresent()) {
-                TypeElement referencedTypeElement = AnnotationUtils.getAnnotationTypeElementValue(typeReferenceAnnotation.get(), "value", env);
+                referencedTypeElement = AnnotationUtils.getAnnotationTypeElementValue(typeReferenceAnnotation.get(), "value", env);
 
                 FormEntity formEntityAnnotation = referencedTypeElement.getAnnotation(FormEntity.class);
                 if (formEntityAnnotation != null) {
@@ -55,7 +59,8 @@ public class ListFormTypeManager implements FormTypeManager<ListFormFieldType> {
                 listFormFieldType = ElementTypeUtils.getDefault(listTypeMirror, env, element);
             }
         }
-        return new ListFormFieldType(listFormFieldType);
+
+        return new ListFormFieldType(listFormFieldType, referencedTypeElement);
     }
 
     private void invalidEntityError(Messager messager, Element element, TypeElement referencedType) {

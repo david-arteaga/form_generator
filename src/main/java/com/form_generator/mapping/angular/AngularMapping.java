@@ -1,22 +1,21 @@
-package com.form_generator.mapping.thymeleaf;
+package com.form_generator.mapping.angular;
 
 import com.form_generator.html.FormHtmlElement;
 import com.form_generator.mapping.FormFieldMapper;
 import com.form_generator.mapping.Mapping;
-import com.form_generator.mapping.thymeleaf.mapper.*;
+import com.form_generator.mapping.angular.mapper.*;
 import com.form_generator.type.*;
 
 /**
  * Created by david on 6/17/17.
  */
-public class ThymeleafMapping implements Mapping {
+public class AngularMapping implements Mapping {
     @Override
     public void completeFormElement(FormHtmlElement formHtmlElement) {
         formHtmlElement
-                .addAttribute("th:method", "post")
-                .addAttribute("th:action", "")
-                .addAttribute("class", "form")
-                .addAttribute("th:object", "${" + formHtmlElement.getVariableName() + "}");
+            .addAttribute("class", "form-container")
+            .addAttribute("[formGroup]", formHtmlElement.getVariableName())
+            .addAttribute("(ngSubmit)", "guardar($event)");
     }
 
     @Override

@@ -29,9 +29,9 @@ public class EntityFormFieldType implements FormFieldType {
     }
 
     @Override
-    public HtmlElement map(FormField formField, Mapping mapping) {
+    public HtmlElement map(FormField formField, Mapping mapping, String formName) {
         FormFieldMapper<EntityFormFieldType> mapper = mapping.getMapper(this);
-        return mapper.mapField(formField, this);
+        return mapper.mapField(formField, this, formName);
     }
 
     @Override

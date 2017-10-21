@@ -12,7 +12,7 @@ import com.form_generator.type.NumberFormFieldType;
 public class NumberFormFieldMapper implements FormFieldMapper<NumberFormFieldType> {
 
     @Override
-    public HtmlElement mapField(FormField formField, NumberFormFieldType formFieldType) {
+    public HtmlElement mapField(FormField formField, NumberFormFieldType formFieldType, String formGroupName) {
         HtmlElement formGroup = new HtmlElement("div")
                 .addAttribute("class", "form-group");
 

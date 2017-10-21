@@ -2,10 +2,7 @@ package com.form_generator.html;
 
 import com.form_generator.rendered.RenderedHtmlElement;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by david on 6/17/17.
@@ -14,11 +11,13 @@ public class HtmlElement implements Attributeable {
     private final String tag;
     private final Map<String, String> attributes;
     private final List<HtmlElement> children;
+    private final Set<String> directives;
 
     public HtmlElement(String tag) {
         this.tag = tag;
         this.attributes = new LinkedHashMap<>();
         this.children = new ArrayList<>();
+        this.directives = new HashSet<>();
     }
 
     public String getTag() {
@@ -54,6 +53,9 @@ public class HtmlElement implements Attributeable {
         // tagname
         sb.append('<').append(getTag()).append(' ');
 
+        // directives
+        getDirectives().forEach((directive) -> sb.append(directive).append(' '));
+
         // attributes
         getAttributes().forEach((k, v) -> {
             sb.append(k).append("=\"").append(v).append("\" ");
@@ -69,5 +71,13 @@ public class HtmlElement implements Attributeable {
         sb.append("</").append(getTag()).append(">");
 
         return new RenderedHtmlElement(getTag(), sb.toString());
+    }
+
+    public Set<String> getDirectives() {
+        return directives;
+    }
+
+    public void addDirective(String directive) {
+        this.directives.add(directive);
     }
 }

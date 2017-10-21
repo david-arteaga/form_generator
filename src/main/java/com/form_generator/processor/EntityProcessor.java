@@ -2,11 +2,12 @@ package com.form_generator.processor;
 
 import com.form_generator.annotation.FormEntity;
 import com.form_generator.annotation.FormIgnore;
+import com.form_generator.entity.Entity;
 import com.form_generator.form.Form;
 import com.form_generator.form.field.FormField;
 import com.form_generator.html.FormHtmlElement;
 import com.form_generator.mapping.Mapping;
-import com.form_generator.mapping.thymeleaf.ThymeleafMapping;
+import com.form_generator.mapping.angular.AngularMapping;
 import com.form_generator.rendered.RenderedForm;
 import com.form_generator.type.utils.ElementTypeUtils;
 import com.google.auto.service.AutoService;
@@ -33,6 +34,20 @@ import java.util.stream.Collectors;
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
 public class EntityProcessor extends AbstractProcessor {
+
+    // this is to enable static access to the methods declared in this class
+    // otherwise if would be necessary to pass along an instance of this class (or an instance of processingEnvironment) to every method that needs
+    // to use methods from here
+    private static EntityProcessor instance;
+
+    public EntityProcessor() {
+        instance = this;
+    }
+
+    private static EntityProcessor getInstance() {
+        return instance;
+    }
+
     /**
      * @return the names of the annotation types supported by this
      * processor, or an empty set if none
@@ -58,9 +73,9 @@ public class EntityProcessor extends AbstractProcessor {
                     .map(e -> (TypeElement) e)
                     .collect(Collectors.toSet());
 
-            Mapping mapping = new ThymeleafMapping();
+            Mapping mapping = new AngularMapping();
 
-            List<RenderedForm> renderedForms = getFormsForElements(annotatedClasses, mapping);
+            List<RenderedForm> renderedForms = getRenderedFormsForElements(annotatedClasses, mapping);
 
             generateFilesForForms(renderedForms);
 
@@ -69,12 +84,12 @@ public class EntityProcessor extends AbstractProcessor {
         return false;
     }
 
-    private void generateFilesForForms(List<RenderedForm> renderedForms) {
-        Filer filer = processingEnv.getFiler();
+    private static void generateFilesForForms(List<RenderedForm> renderedForms) {
+        Filer filer = getInstance().processingEnv.getFiler();
         renderedForms.forEach(renderedForm -> {
             try {
                 FileObject file = filer.createResource(StandardLocation.SOURCE_OUTPUT, "resources.main.templates",
-                        renderedForm.getName() + "Form.html");
+                        renderedForm.getName() + ".html");
                 try (Writer out = file.openWriter()) {
                     out.write(renderedForm.getRenderedHtmlElement().getHtml());
                 }
@@ -85,47 +100,50 @@ public class EntityProcessor extends AbstractProcessor {
         });
     }
 
-    private List<RenderedForm> getFormsForElements(Collection<? extends TypeElement> _typeElements, Mapping mapping) {
-        List<? extends TypeElement> typeElements = _typeElements.stream()
-                .filter(this::shouldGenerateForm)
-                .collect(Collectors.toList());
+    private static List<RenderedForm> getRenderedFormsForElements(Collection<? extends TypeElement> typeElements, Mapping mapping) {
+        List<FormHtmlElement> formHtmlElements = getFormHtmlElementsForTypeElements(typeElements, mapping);
 
-        List<Form> forms = typeElements.stream()
-                .map(te -> new Form(te.getSimpleName().toString(), getFormFieldsForTypeElement(te)) )
-                .collect(Collectors.toList());
-
-        List<FormHtmlElement> formHtmlElements = forms.stream()
-                .map(f -> f.map(mapping))
-                .collect(Collectors.toList());
-
-        List<RenderedForm> renderedForms = formHtmlElements.stream()
+        return formHtmlElements.stream()
                 .map(FormHtmlElement::renderFormHtmlElement)
                 .collect(Collectors.toList());
-
-        return renderedForms;
     }
 
-    private List<FormField> getFormFieldsForTypeElement(TypeElement typeElement) {
+    public static List<FormHtmlElement> getFormHtmlElementsForTypeElements(Collection<? extends TypeElement> typeElements, Mapping mapping) {
+        typeElements = typeElements.stream()
+                .filter(EntityProcessor::shouldGenerateForm)
+                .collect(Collectors.toList());
+
+        return typeElements.stream()
+                .map(te -> getFormHtmlElement(te, mapping) )
+                .collect(Collectors.toList());
+    }
+
+    public static FormHtmlElement getFormHtmlElement(TypeElement typeElement, Mapping mapping) {
+
+        Form form =  new Form(typeElement.getSimpleName().toString() + "Form", getFormFieldsForTypeElement(typeElement));
+
+        return form.map(mapping);
+    }
+
+    private static List<FormField> getFormFieldsForTypeElement(TypeElement typeElement) {
         List<Element> elements = getElementsForClass(typeElement);
 
-        return ElementTypeUtils.getFormFieldsForElements(elements, processingEnv);
+        return ElementTypeUtils.getFormFieldsForElements(elements, EntityProcessor.getInstance().processingEnv);
     }
 
-    private  boolean shouldGenerateForm(TypeElement e) {
+    private static boolean shouldGenerateForm(TypeElement e) {
         return e.getAnnotation(FormEntity.class).generateForm();
     }
 
-    private List<Element> getElementsForClass(TypeElement clazz) {
+    private static List<Element> getElementsForClass(TypeElement clazz) {
         return clazz.getEnclosedElements().stream()
                 .filter(e -> e.getKind().isField())
-                .filter(this::notIgnored)
+                .filter(EntityProcessor::notIgnored)
                 .map(VariableElement.class::cast)
                 .collect(Collectors.toList());
     }
 
-
-
-    private boolean notIgnored(Element element) {
+    private static boolean notIgnored(Element element) {
        return element.getAnnotation(FormIgnore.class) == null;
     }
 }

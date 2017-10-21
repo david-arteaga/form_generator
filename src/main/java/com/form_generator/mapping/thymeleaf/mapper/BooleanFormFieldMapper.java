@@ -13,7 +13,7 @@ import com.form_generator.type.BooleanFormFieldType;
 public class BooleanFormFieldMapper implements FormFieldMapper<BooleanFormFieldType> {
 
     @Override
-    public HtmlElement mapField(FormField formField, BooleanFormFieldType formFieldType) {
+    public HtmlElement mapField(FormField formField, BooleanFormFieldType formFieldType, String formGroupName) {
         HtmlElement div = new HtmlElement("div");
         div.addAttribute("class", "form-group");
 

@@ -18,7 +18,7 @@ import com.form_generator.type.ListFormFieldType;
 public class ListFormFieldMapper implements FormFieldMapper<ListFormFieldType> {
 
     @Override
-    public HtmlElement mapField(FormField formField, ListFormFieldType formFieldType) {
+    public HtmlElement mapField(FormField formField, ListFormFieldType formFieldType, String formGroupName) {
         //TODO
 
         HtmlElement panel = new HtmlElement("panel")
@@ -60,7 +60,7 @@ public class ListFormFieldMapper implements FormFieldMapper<ListFormFieldType> {
 
         // form
         FormFieldType listFormFieldType = formFieldType.getListFormFieldType();
-        HtmlElement inputFieldForForm = listFormFieldType.map(formField, new ThymeleafMapping());
+        HtmlElement inputFieldForForm = listFormFieldType.map(formField, new ThymeleafMapping(), formGroupName);
         HtmlUtils.removeThymeleafFields(inputFieldForForm);
         HtmlElement form = new HtmlElement("form")
                 .appendChild(inputFieldForForm)

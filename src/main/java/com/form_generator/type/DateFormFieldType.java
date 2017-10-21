@@ -22,9 +22,9 @@ public class DateFormFieldType implements FormFieldType {
     }
 
     @Override
-    public HtmlElement map(FormField formField, Mapping mapping) {
+    public HtmlElement map(FormField formField, Mapping mapping, String formName) {
         FormFieldMapper<DateFormFieldType> mapper = mapping.getMapper(this);
-        return mapper.mapField(formField, this);
+        return mapper.mapField(formField, this, formName);
     }
 
     public DateInputType getDateInputType() {

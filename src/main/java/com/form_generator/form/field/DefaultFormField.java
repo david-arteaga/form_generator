@@ -82,7 +82,7 @@ public class DefaultFormField implements FormField {
     }
 
     @Override
-    public HtmlElement map(Mapping mapping) {
-        return formFieldType.map(this, mapping);
+    public HtmlElement map(Mapping mapping, String formName) {
+        return formFieldType.map(this, mapping, formName);
     }
 }

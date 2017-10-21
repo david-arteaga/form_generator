@@ -14,7 +14,7 @@ import com.form_generator.type.EntityFormFieldType;
 public class EntityFormFieldMapper implements FormFieldMapper<EntityFormFieldType> {
 
     @Override
-    public HtmlElement mapField(FormField formField, EntityFormFieldType formFieldType) {
+    public HtmlElement mapField(FormField formField, EntityFormFieldType formFieldType, String formGroupName) {
         Entity entity = formFieldType.getEntity();
         String idFieldName = entity.getIdFieldName();
 

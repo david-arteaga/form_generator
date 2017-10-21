@@ -30,7 +30,7 @@ public class Form {
 
     public FormHtmlElement map(Mapping mapping) {
         List<HtmlElement> children = fields.stream()
-                .map(f -> f.map(mapping))
+                .map(f -> f.map(mapping, name))
                 .collect(Collectors.toList());
 
         FormHtmlElement formHtmlElement = new FormHtmlElement(name, children);

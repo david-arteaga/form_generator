@@ -12,7 +12,7 @@ import com.form_generator.type.DateFormFieldType;
 public class DateFormFieldMapper implements FormFieldMapper<DateFormFieldType> {
 
     @Override
-    public HtmlElement mapField(FormField formField, DateFormFieldType formFieldType) {
+    public HtmlElement mapField(FormField formField, DateFormFieldType formFieldType, String formGroupName) {
         HtmlElement formGroup = new HtmlElement("div")
                 .addAttribute("class", "form-group");
 

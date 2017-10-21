@@ -12,7 +12,7 @@ import com.form_generator.type.StringFormFieldType;
 public class StringFormFieldMapper implements FormFieldMapper<StringFormFieldType> {
 
     @Override
-    public HtmlElement mapField(FormField formField, StringFormFieldType formFieldType) {
+    public HtmlElement mapField(FormField formField, StringFormFieldType formFieldType, String formGroupName) {
         HtmlElement formGroup = new HtmlElement("div");
         formGroup.addAttribute("class", "form-group");
 
